@@ -20,12 +20,6 @@
 substitutions:
   yambms_version: "1.5.4"
 
-external_components:
-  # https://github.com/esphome/esphome/pull/7547
-  # api: ensure fair network sharing + prevent lost state changes via deferred publish at high event load
-  - source: github://pr#7547
-    components: [ api, event ]
-
 esphome:
   name: ${name}
   # friendly_name: ${name}
@@ -49,7 +43,7 @@ button:
     entity_category: config
 
 binary_sensor:
-  # https://esphome.io/components/binary_sensor/status  
+  # https://esphome.io/components/binary_sensor/status
   - platform: status
     name: ${name} ESP32 Online Status
     id: esp32_online_status

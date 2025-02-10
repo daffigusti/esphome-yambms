@@ -36,7 +36,7 @@ esp32:
 
 esphome:
   platformio_options:
-    board_build.flash_mode: dio             # use Dual IO (dio) instead of Quad IO (qio) to prevent boot loop after flashing
+    board_build.flash_mode: dio # use Dual IO (dio) instead of Quad IO (qio) to prevent boot loop after flashing
 
 # PSRAM activation with default options
 # psram:
@@ -57,8 +57,8 @@ uart:
   # UART 0 : USB UART port used for ESP32 flashing and logs, can be released if necessary (tx_pin: 43, rx_pin: 44)
   # UART 1
   - id: uart_esp_1
-    tx_pin: 17
-    rx_pin: 18
+    tx_pin: 16
+    rx_pin: 17
     baud_rate: 115200
     rx_buffer_size: 512
   # UART 2

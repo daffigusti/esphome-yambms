@@ -48,14 +48,17 @@ uart:
   # UART 0 : uart used for ESP32 flashing and logs, can be released if necessary (tx_pin: 1, rx_pin: 3)
   # UART 1
   - id: uart_esp_1
-    tx_pin: 17
-    rx_pin: 16
-    baud_rate: 115200
-    rx_buffer_size: 512
+    tx_pin: GPIO16
+    rx_pin: GPIO17
+
+    baud_rate: 9600
+    debug:
+      direction: BOTH
+      dummy_receiver: false
   # UART 2
   - id: uart_esp_2
     tx_pin: 19
-    rx_pin: 18
+    rx_pin: 20
     baud_rate: 115200
     rx_buffer_size: 512
   # UART 3

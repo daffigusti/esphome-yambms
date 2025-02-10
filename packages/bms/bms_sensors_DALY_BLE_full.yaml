@@ -1,0 +1,328 @@
+# Updated : 2025.01.28
+# Version : 1.1.1
+# GitHub  : https://github.com/syssi/esphome-jdb-bms
+
+# YamBMS ( Yet another multi-BMS Merging Solution )
+
+# This YAML is free software: you can redistribute it and/or
+# modify it under the terms of the GNU General Public License
+# as published by the Free Software Foundation, either version 3
+# of the License, or (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+# See the GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program. If not, see <http://www.gnu.org/licenses/gpl.html>.
+
+packages:
+  bms_base: !include bms_base.yaml
+  bms_temperature_sensor: !include bms_temperature_sensor_2.yaml
+  bms_errors_bitmask: !include bms_errors_bitmask_JK-ALL_BLE.yaml
+
+ota:
+  on_begin:
+    then:
+      - switch.turn_off: bms${bms_id}_enable_bluetooth_connection
+      - logger.log: "BLE shutdown for flashing"
+
+# +--------------------------------------+
+# | Component settings                   |
+# +--------------------------------------+
+
+external_components:
+  - source: github://syssi/esphome-daly-bms@main
+    refresh: 0s
+
+esp32_ble_tracker:
+  scan_parameters:
+    active: false
+
+ble_client:
+  - id: ble_client${bms_id}
+    mac_address: ${bms_ble_mac_address}
+
+daly_bms_ble:
+  - id: daly_bms_ble${bms_id}
+    ble_client_id: ble_client${bms_id}
+    password: 12345678
+    update_interval: ${bms_update_interval} # Some Liontron BMS models require an update interval of less than 8s
+
+# +--------------------------------------+
+# | Component entities                   |
+# +--------------------------------------+
+
+binary_sensor:
+  - platform: daly_bms_ble
+    daly_bms_ble_id: daly_bms_ble${bms_id}
+    balancing:
+      id: bms${bms_id}_equalizing
+      name: "${name} ${bms_name} balancing"
+    charging:
+      id: bms${bms_id}_charging_allowed
+      name: "${name} ${bms_name} charging"
+    discharging:
+      id: bms${bms_id}_discharging_allowed
+      name: "${name} ${bms_name} discharging"
+    # online_status
+  - platform: template
+    id: bms${bms_id}_online_status
+    name: "${name} ${bms_name} online status"
+    lambda: |-
+      if (id(bms${bms_id}_total_voltage).state > 0)
+        return true;
+      else
+        return false;
+
+button:
+  - platform: daly_bms_ble
+    # Retrieves the BMS settings and prints them in the ESPHome logs
+    retrieve_settings:
+      name: "${name} ${bms_name} retrieve settings"
+    # Restarts the BMS
+    restart:
+      name: "${name} ${bms_name} restart"
+    # Shuts down the BMS
+    shutdown:
+      name: "${name} ${bms_name} shutdown"
+    # Resets the BMS to the factory settings
+    factory_reset:
+      name: "${name} ${bms_name} factory reset"
+    # Resets the BMS current to zero
+    reset_current:
+      name: "${name} ${bms_name} reset current"
+
+sensor:
+  - platform: daly_bms_ble
+    daly_bms_ble_id: daly_bms_ble${bms_id}
+    error_bitmask:
+      id: bms${bms_id}_errors_bitmask
+      name: "${name} ${bms_name} error bitmask"
+    total_voltage:
+      id: bms${bms_id}_total_voltage
+      name: "${name} ${bms_name} total voltage"
+    current:
+      id: bms${bms_id}_current
+      name: "${name} ${bms_name} current"
+    power:
+      id: bms${bms_id}_power
+      name: "${name} ${bms_name} power"
+    charging_power:
+      id: bms${bms_id}_charging_power
+      name: "${name} ${bms_name} charging power"
+    discharging_power:
+      id: bms${bms_id}_discharging_power
+      name: "${name} ${bms_name} discharging power"
+    state_of_charge:
+      id: bms${bms_id}_state_of_charge
+      name: "${name} ${bms_name} state of charge"
+    charging_cycles:
+      id: bms${bms_id}_charging_cycles
+      name: "${name} ${bms_name} charging cycles"
+    min_cell_voltage:
+      id: bms${bms_id}_min_cell_voltage
+      name: "${name} ${bms_name} min cell voltage"
+    max_cell_voltage:
+      id: bms${bms_id}_max_cell_voltage
+      name: "${name} ${bms_name} max cell voltage"
+    min_voltage_cell:
+      id: bms${bms_id}_min_voltage_cell
+      name: "${name} ${bms_name} min voltage cell"
+    max_voltage_cell:
+      id: bms${bms_id}_max_voltage_cell
+      name: "${name} ${bms_name} max voltage cell"
+    delta_cell_voltage:
+      id: bms${bms_id}_delta_cell_voltage
+      name: "${name} ${bms_name} delta cell voltage"
+    average_cell_voltage:
+      id: bms${bms_id}_average_cell_voltage
+      name: "${name} ${bms_name} average cell voltage"
+    temperature_1:
+      id: bms${bms_id}_temperature_sensor_1
+      name: "${name} ${bms_name} temperature 1"
+    temperature_2:
+      id: bms${bms_id}_temperature_sensor_2
+      name: "${name} ${bms_name} temperature 2"
+    temperature_3:
+      id: bms${bms_id}_temperature_sensor_3
+      name: "${name} ${bms_name} temperature 3"
+    temperature_4:
+      id: bms${bms_id}_temperature_sensor_4
+      name: "${name} ${bms_name} temperature 4"
+    temperature_5:
+      id: bms${bms_id}_temperature_sensor_5
+      name: "${name} ${bms_name} temperature 5"
+    temperature_6:
+      id: bms${bms_id}_temperature_sensor_6
+      name: "${name} ${bms_name} temperature 6"
+    temperature_7:
+      id: bms${bms_id}_temperature_sensor_7
+      name: "${name} ${bms_name} temperature 7"
+    temperature_8:
+      id: bms${bms_id}_temperature_sensor_8
+      name: "${name} ${bms_name} temperature 8"
+    cell_voltage_1:
+      id: bms${bms_id}_cell_voltage_01
+      name: "${name} ${bms_name} cell voltage 01"
+    cell_voltage_2:
+      id: bms${bms_id}_cell_voltage_02
+      name: "${name} ${bms_name} cell voltage 02"
+    cell_voltage_3:
+      id: bms${bms_id}_cell_voltage_03
+      name: "${name} ${bms_name} cell voltage 03"
+    cell_voltage_4:
+      id: bms${bms_id}_cell_voltage_04
+      name: "${name} ${bms_name} cell voltage 04"
+    cell_voltage_5:
+      id: bms${bms_id}_cell_voltage_05
+      name: "${name} ${bms_name} cell voltage 05"
+    cell_voltage_6:
+      id: bms${bms_id}_cell_voltage_06
+      name: "${name} ${bms_name} cell voltage 06"
+    cell_voltage_7:
+      id: bms${bms_id}_cell_voltage_07
+      name: "${name} ${bms_name} cell voltage 07"
+    cell_voltage_8:
+      id: bms${bms_id}_cell_voltage_08
+      name: "${name} ${bms_name} cell voltage 08"
+    cell_voltage_9:
+      id: bms${bms_id}_cell_voltage_09
+      name: "${name} ${bms_name} cell voltage 09"
+    cell_voltage_10:
+      id: bms${bms_id}_cell_voltage_10
+      name: "${name} ${bms_name} cell voltage 10"
+    cell_voltage_11:
+      id: bms${bms_id}_cell_voltage_11
+      name: "${name} ${bms_name} cell voltage 11"
+    cell_voltage_12:
+      id: bms${bms_id}_cell_voltage_12
+      name: "${name} ${bms_name} cell voltage 12"
+    cell_voltage_13:
+      id: bms${bms_id}_cell_voltage_13
+      name: "${name} ${bms_name} cell voltage 13"
+    cell_voltage_14:
+      id: bms${bms_id}_cell_voltage_14
+      name: "${name} ${bms_name} cell voltage 14"
+    cell_voltage_15:
+      id: bms${bms_id}_cell_voltage_15
+      name: "${name} ${bms_name} cell voltage 15"
+    cell_voltage_16:
+      id: bms${bms_id}_cell_voltage_16
+      name: "${name} ${bms_name} cell voltage 16"
+    cell_count:
+      id: bms${bms_id}_cell_count
+      name: "${name} ${bms_name} cell count"
+    temperature_sensors:
+      id: bms${bms_id}_temperature_sensors
+      name: "${name} ${bms_name} temperature sensors"
+    capacity_remaining:
+      id: bms${bms_id}_capacity_remaining_ah
+      name: "${name} ${bms_name} capacity remaining"
+
+  # Required sensors cannot be retrieved from BMS
+  # battery_capacity
+  - platform: template
+    id: bms${bms_id}_battery_capacity
+    name: "${name} ${bms_name} Battery Capacity"
+    update_interval: ${bms_update_interval}
+    accuracy_decimals: 0
+    unit_of_measurement: Ah
+    device_class: energy_storage
+    filters:
+      - or:
+          - throttle: 10s
+          - delta: 1
+    lambda: return ${bms_battery_capacity};
+  # max_charge_current
+  - platform: template
+    id: bms${bms_id}_max_charge_current
+    name: "${name} ${bms_name} max charge current"
+    update_interval: ${bms_update_interval}
+    accuracy_decimals: 0
+    unit_of_measurement: A
+    icon: mdi:current-dc
+    filters:
+      - or:
+          - throttle: 10s
+          - delta: 1
+    lambda: return ${bms_max_charge_current};
+
+  # max_discharge_current
+  - platform: template
+    id: bms${bms_id}_max_discharge_current
+    name: "${name} ${bms_name} max discharge current"
+    update_interval: ${bms_update_interval}
+    accuracy_decimals: 0
+    unit_of_measurement: A
+    icon: mdi:current-dc
+    filters:
+      - or:
+          - throttle: 10s
+          - delta: 1
+    lambda: return ${bms_max_discharge_current};
+  # cell_ovp
+  - platform: template
+    id: bms${bms_id}_cell_ovp
+    name: "${name} ${bms_name} cell ovp"
+    update_interval: ${bms_update_interval}
+    accuracy_decimals: 3
+    unit_of_measurement: V
+    device_class: voltage
+    filters:
+      - or:
+          - throttle: 10s
+          - delta: 0.001
+    lambda: return ${bms_cell_ovp};
+  # cell_uvp
+  - platform: template
+    id: bms${bms_id}_cell_uvp
+    name: "${name} ${bms_name} cell uvp"
+    update_interval: ${bms_update_interval}
+    accuracy_decimals: 3
+    unit_of_measurement: V
+    device_class: voltage
+    filters:
+      - or:
+          - throttle: 10s
+          - delta: 0.001
+    lambda: return ${bms_cell_uvp};
+  # balance_trigger_voltage
+  - platform: template
+    id: bms${bms_id}_balance_trigger_voltage
+    name: "${name} ${bms_name} balance trigger voltage"
+    update_interval: ${bms_update_interval}
+    accuracy_decimals: 3
+    unit_of_measurement: V
+    device_class: voltage
+    filters:
+      - or:
+          - throttle: 10s
+          - delta: 0.001
+    lambda: return ${bms_balance_trigger_voltage};
+
+text_sensor:
+  - platform: daly_bms_ble
+    daly_bms_ble_id: daly_bms_ble${bms_id}
+    battery_status:
+      name: "${name} ${bms_name} battery status"
+    errors:
+      name: "${name} ${bms_name} errors"
+
+switch:
+  - platform: daly_bms_ble
+    balancer:
+      id: bms${bms_id}_balance_switch
+      name: "${name} ${bms_name} balancer"
+    charging:
+      id: bms${bms_id}_charge_switch
+      name: "${name} ${bms_name} charging"
+    discharging:
+      id: bms${bms_id}_discharge_switch
+      name: "${name} ${bms_name} discharging"
+
+  - platform: ble_client
+    ble_client_id: ble_client${bms_id}
+    id: bms${bms_id}_enable_bluetooth_connection
+    name: "${name} ${bms_name} enable bluetooth connection"

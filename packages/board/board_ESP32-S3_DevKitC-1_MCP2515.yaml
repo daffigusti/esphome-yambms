@@ -36,7 +36,7 @@ esp32:
 
 esphome:
   platformio_options:
-    board_build.flash_mode: dio             # use Dual IO (dio) instead of Quad IO (qio) to prevent boot loop after flashing
+    board_build.flash_mode: dio # use Dual IO (dio) instead of Quad IO (qio) to prevent boot loop after flashing
 
 # PSRAM activation with default options
 # psram:
@@ -59,7 +59,7 @@ uart:
   - id: uart_esp_1
     tx_pin: 17
     rx_pin: 18
-    baud_rate: 115200
+    baud_rate: 9600
     rx_buffer_size: 512
   # UART 2
   - id: uart_esp_2

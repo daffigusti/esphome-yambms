@@ -1,0 +1,46 @@
+ota:
+  platform: esphome
+
+substitutions:
+  name: yambms
+
+logger:
+  level: DEBUG # DEBUG / INFO / WARN
+  logs:
+    esp32_ble_tracker: INFO
+    esp32_ble_client: INFO
+
+api:
+  reboot_timeout: 0s
+
+packages:
+  ############### >>> UNCOMMENT YOUR BOARD <<< ###############
+
+  # This list is incomplete, other board.yaml are available in the board folder
+
+  device_board: !include packages/board/board_ESP32_Generic.yaml
+
+  # +--------------------------------------+
+  # | DEBUG ( logger level must be DEBUG ) |
+  # +--------------------------------------+
+
+  device_debug: !include
+    file: packages/base/device_debug_ESP32.yaml
+    vars:
+      debug_name: "Debug"
+      debug_update_interval: "5s"
+
+canbus:
+  # CANBUS NODE 1
+  - platform: esp32_can
+    id: canbus_node1
+    tx_pin: 23 # to CAN board CTX
+    rx_pin: 22 # to CAN board CRX (with 4.7K resistor except for SN65HVD230)
+    can_id: 1
+    bit_rate: 500kbps
+
+sensor:
+  - platform: canbus
+    can_id: 0x305 # ID to listen for
+    name: "Received CAN Data"
+    id: esp32_canbus_data
