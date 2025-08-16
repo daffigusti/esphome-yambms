@@ -26,7 +26,7 @@ packages:
   device_base_wifi: !include ../base/device_base_wifi.yaml
   device_cpu_freq_240: !include board_options_cpu_freq_240_esp32-s3.yaml
   board_rgb_led: !include board_options_rgb_led_status.yaml
-  # psram_settings: !include board_options_psram_settings.yaml
+  psram_settings: !include board_options_psram_settings.yaml
 
 esp32:
   board: esp32-s3-devkitc-1
@@ -39,9 +39,9 @@ esphome:
     board_build.flash_mode: dio # use Dual IO (dio) instead of Quad IO (qio) to prevent boot loop after flashing
 
 # PSRAM activation with default options
-# psram:
-#   mode: octal
-#   speed: 80MHz
+psram:
+  mode: octal
+  speed: 80MHz
 
 wifi:
   id: my_network
@@ -57,15 +57,15 @@ uart:
   # UART 0 : USB UART port used for ESP32 flashing and logs, can be released if necessary (tx_pin: 43, rx_pin: 44)
   # UART 1
   - id: uart_esp_1
-    tx_pin: 16
-    rx_pin: 17
-    baud_rate: 115200
+    tx_pin: 17
+    rx_pin: 18
+    baud_rate: 9600
     rx_buffer_size: 512
   # UART 2
   - id: uart_esp_2
     tx_pin: 15
     rx_pin: 16
-    baud_rate: 115200
+    baud_rate: 9600
     rx_buffer_size: 512
   # UART 3
   - id: uart_esp_3

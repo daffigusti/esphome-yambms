@@ -35,6 +35,7 @@ time:
   # https://esphome.io/components/time/sntp
   - platform: sntp # homeassistant
     id: my_time
+    timezone: Asia/Jakarta
 
 button:
   # https://esphome.io/components/button/restart
