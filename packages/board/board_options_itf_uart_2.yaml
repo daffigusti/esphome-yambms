@@ -21,5 +21,5 @@ uart:
   - id: uart_2
     tx_pin: ${tx_pin_2}
     rx_pin: ${rx_pin_2}
-    baud_rate: 19200
+    baud_rate: 9600
     rx_buffer_size: 256

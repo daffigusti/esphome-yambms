@@ -168,7 +168,7 @@ packages:
       # UART 2 (uart_id: uart_esp_2)
       - path: "packages/board/board_options_itf_uart_esp_2.yaml"
       # UART 3 (uart_id: uart_esp_3)
-      # - path: 'packages/board/board_options_itf_uart_esp_3.yaml'
+      - path: "packages/board/board_options_itf_uart_esp_3.yaml"
 
       # CAN transceiver - ESP32_CAN (TJA105x, SN65HVD230, M5Stack CAN base/unit)
       - path: "packages/board/board_options_itf_canbus_esp32_can.yaml"
@@ -185,7 +185,7 @@ packages:
       #     canbus_node_id: 'canbus_inverter_1'
 
       # PSRAM octal 80Mhz
-      # - path: 'packages/board/board_options_PSRAM_octal_80Mhz.yaml'
+      - path: "packages/board/board_options_PSRAM_octal_80Mhz.yaml"
 
       # Web Server
       # - path: 'packages/yambms/yambms_web_server.yaml'
@@ -221,15 +221,39 @@ packages:
           # Maximum cell charging cycles is used to calculate the battey SoH.
           # MB31=8000.0, LF280K v3=8000.0, LF280K v2=6000.0, LF280=3000.0 (decimal is required)
           bms_cell_max_cycles: "6000.0"
+          bms_battery_capacity: "100"
+          bms_max_charge_current: "100" # A. Used to calculate maximum charge current
+          bms_max_discharge_current: "100" # A. Used to calculate maximum discharge current
+          bms_cell_ovp: "3.650" # V. Used by 'Auto CCL' functions
+          bms_cell_uvp: "2.800" # V. Used by 'Auto DCL' functions and to calculate maximum discharge voltage
       # BMS 2
-      - path: "packages/bms/bms_combine_JK_UART_4G-GPS_full.yaml"
+      - path: "packages/bms/bms_sensors_SMARTLI_RS485.yaml"
         vars:
           bms_id: "2" # must be a number
-          bms_name: "JK-BMS 2"
+          bms_name: "SMARTLI-BMS 2"
+          bms_uart_id: "uart_esp_1"
+          # Maximum cell charging cycles is used to calculate the battey SoH.
+          # MB31=8000.0, LF280K v3=8000.0, LF280K v2=6000.0, LF280=3000.0 (decimal is required)
+          bms_cell_max_cycles: "6000.0"
+          bms_battery_capacity: "100"
+          bms_max_charge_current: "100" # A. Used to calculate maximum charge current
+          bms_max_discharge_current: "100" # A. Used to calculate maximum discharge current
+          bms_cell_ovp: "3.650" # V. Used by 'Auto CCL' functions
+          bms_cell_uvp: "2.800" # V. Used by 'Auto DCL' functions and to calculate maximum discharge voltage
+      # BMS 3
+      - path: "packages/bms/bms_sensors_SMARTLI_RS485.yaml"
+        vars:
+          bms_id: "3" # must be a number
+          bms_name: "SMARTLI-BMS 3"
           bms_uart_id: "uart_esp_2"
           # Maximum cell charging cycles is used to calculate the battey SoH.
           # MB31=8000.0, LF280K v3=8000.0, LF280K v2=6000.0, LF280=3000.0 (decimal is required)
           bms_cell_max_cycles: "6000.0"
+          bms_battery_capacity: "150"
+          bms_max_charge_current: "100" # A. Used to calculate maximum charge current
+          bms_max_discharge_current: "100" # A. Used to calculate maximum discharge current
+          bms_cell_ovp: "3.650" # V. Used by 'Auto CCL' functions
+          bms_cell_uvp: "2.800" # V. Used by 'Auto DCL' functions and to calculate maximum discharge voltage
 
   # +------------------------------------------------------------------------------+
   # | >>> YamBMS
@@ -294,7 +318,7 @@ packages:
           debug_update_interval: "5s"
           # Size of your PSRAM in bits
           # 8Mb='8388608' | 6Mb='6291456' | 4Mb='4194304' | 2Mb='2097152' | NoPSRAM='0'
-          debug_psram_size: "8388608"
+          debug_psram_size: "16777216"
 
   # +------------------------------------------------------------------------------+
   # | >>> Config and Custom Local Packages
