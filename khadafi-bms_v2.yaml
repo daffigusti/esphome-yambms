@@ -1,6 +1,6 @@
 # Updated : 2025.08.12
 # Version : 1.5.8
-# GitHub  : https://github.com/Sleeper85/esphome-yambms
+# GitHub  : https://github.com/daffigusti/esphome-yambms
 
 # YamBMS ( Yet another multi-BMS Merging Solution )
 
@@ -112,7 +112,7 @@ substitutions:
 # | Packages                             |
 # +--------------------------------------+
 
-# PLEASE READ : https://github.com/Sleeper85/esphome-yambms/blob/main/documents/README/YamBMS_RP_YAML.md
+# PLEASE READ : https://github.com/daffigusti/esphome-yambms/blob/main/documents/README/YamBMS_RP_YAML.md
 
 packages:
   # +------------------------------------------------------------------------------+
@@ -121,7 +121,7 @@ packages:
   # +------------------------------------------------------------------------------+
 
   board:
-    url: https://github.com/Sleeper85/esphome-yambms
+    url: https://github.com/daffigusti/esphome-yambms
     ref: main
     refresh: 0s
     files:
@@ -159,7 +159,7 @@ packages:
   # +------------------------------------------------------------------------------+
 
   board_options:
-    url: https://github.com/Sleeper85/esphome-yambms
+    url: https://github.com/daffigusti/esphome-yambms
     ref: main
     refresh: 0s
     files:
@@ -205,10 +205,10 @@ packages:
 
   # >>> Copy your BMS and Shunt packages here
   # >>> You can find examples at this address :
-  # >>> https://github.com/Sleeper85/esphome-yambms/tree/main/examples/single-node/
+  # >>> https://github.com/daffigusti/esphome-yambms/tree/main/examples/single-node/
 
   bms:
-    url: https://github.com/Sleeper85/esphome-yambms
+    url: https://github.com/daffigusti/esphome-yambms
     ref: main
     refresh: 0s
     files:
@@ -260,7 +260,7 @@ packages:
   # +------------------------------------------------------------------------------+
 
   yambms:
-    url: https://github.com/Sleeper85/esphome-yambms
+    url: https://github.com/daffigusti/esphome-yambms
     ref: main
     refresh: 0s
     files:
@@ -271,7 +271,7 @@ packages:
   # +------------------------------------------------------------------------------+
 
   canbus:
-    url: https://github.com/Sleeper85/esphome-yambms
+    url: https://github.com/daffigusti/esphome-yambms
     ref: main
     refresh: 0s
     files:
@@ -290,7 +290,7 @@ packages:
   # +------------------------------------------------------------------------------+
 
   # rs485_pylon:
-  #   url: https://github.com/Sleeper85/esphome-yambms
+  #   url: https://github.com/daffigusti/esphome-yambms
   #   ref: main
   #   refresh: 0s
   #   files:
@@ -307,7 +307,7 @@ packages:
   # +------------------------------------------------------------------------------+
 
   debug:
-    url: https://github.com/Sleeper85/esphome-yambms
+    url: https://github.com/daffigusti/esphome-yambms
     ref: main
     refresh: 0s
     files:
