@@ -231,7 +231,7 @@ packages:
         vars:
           bms_id: "2" # must be a number
           bms_name: "SMARTLI-BMS 2"
-          bms_uart_id: "uart_esp_2"
+          bms_uart_id: "uart_esp_1"
           # Maximum cell charging cycles is used to calculate the battey SoH.
           # MB31=8000.0, LF280K v3=8000.0, LF280K v2=6000.0, LF280=3000.0 (decimal is required)
           bms_cell_max_cycles: "6000.0"
@@ -246,7 +246,7 @@ packages:
         vars:
           bms_id: "3" # must be a number
           bms_name: "SMARTLI-BMS 3"
-          bms_uart_id: "uart_esp_1"
+          bms_uart_id: "uart_esp_2"
           # Maximum cell charging cycles is used to calculate the battey SoH.
           # MB31=8000.0, LF280K v3=8000.0, LF280K v2=6000.0, LF280=3000.0 (decimal is required)
           bms_cell_max_cycles: "6000.0"
