@@ -735,8 +735,22 @@ sensor:
         return {};
       }
 
+  - platform: template
+    name: "${name} ${bms_name} charging cycle capacity"
+    id: "bms${bms_id}_cycle_capacity_raw"
+    internal: true
+    update_interval: ${bms_update_interval}
+    unit_of_measurement: Ah
+    state_class: "measurement"
+    accuracy_decimals: 0
+    icon: mdi:car-battery
+    filters:
+      - or:
+          - throttle: 600s
+          - delta: 1
+    lambda: |-
+      return id(bms${bms_id}_charging_cycles_raw).state * id(bms${bms_id}_battery_capacity).state;
   # Required sensors cannot be retrieved from BMS
-
   # max_charge_current
   - platform: template
     id: bms${bms_id}_max_charge_current
