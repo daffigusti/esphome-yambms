@@ -221,7 +221,6 @@ sensor:
     modbus_controller_id: bms${bms_id}
     id: bms${bms_id}_battery_soc
     name: "${name} ${bms_name} Battery SoC"
-    update_interval: ${bms_update_interval}
     address: 3
     register_type: holding
     value_type: U_WORD
@@ -249,7 +248,6 @@ sensor:
     modbus_controller_id: bms${bms_id}
     id: bms${bms_id}_battery_soh
     name: "${name} ${bms_name} Battery SoH"
-    update_interval: ${bms_update_interval}
     address: 0x1035
     register_type: holding
     value_type: U_WORD
