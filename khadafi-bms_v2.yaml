@@ -35,7 +35,7 @@
 #     dns2: 8.8.4.4
 
 logger:
-  level: INFO # VERBOSE / DEBUG / INFO / WARN
+  level: DEBUG # VERBOSE / DEBUG / INFO / WARN
 
 ota:
   - platform: esphome
