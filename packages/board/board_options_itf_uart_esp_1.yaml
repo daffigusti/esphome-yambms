@@ -21,5 +21,5 @@ uart:
   - id: uart_esp_1
     tx_pin: ${tx_pin_1}
     rx_pin: ${rx_pin_1}
-    baud_rate: 115200
+    baud_rate: 9600
     rx_buffer_size: 512
