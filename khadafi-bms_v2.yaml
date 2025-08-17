@@ -240,6 +240,7 @@ packages:
           bms_max_discharge_current: "100" # A. Used to calculate maximum discharge current
           bms_cell_ovp: "3.650" # V. Used by 'Auto CCL' functions
           bms_cell_uvp: "2.800" # V. Used by 'Auto DCL' functions and to calculate maximum discharge voltage
+          bms_balance_trigger_voltage: "0.010"
       # BMS 3
       - path: "packages/bms/bms_sensors_SMARTLI_RS485.yaml"
         vars:
@@ -254,6 +255,7 @@ packages:
           bms_max_discharge_current: "100" # A. Used to calculate maximum discharge current
           bms_cell_ovp: "3.650" # V. Used by 'Auto CCL' functions
           bms_cell_uvp: "2.800" # V. Used by 'Auto DCL' functions and to calculate maximum discharge voltage
+          bms_balance_trigger_voltage: "0.010"
 
   # +------------------------------------------------------------------------------+
   # | >>> YamBMS
