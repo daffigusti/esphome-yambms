@@ -224,7 +224,7 @@ packages:
       bms_cell_uvp: "2.800" # V. Used by 'Auto DCL' functions and to calculate maximum discharge voltage
   # BMS 2 - SMARTLI RS485 with address 0x01
   bms_2: !include
-    file: packages/bms/bms_sensors_SMARTLI_RS485_shared.yaml
+    file: packages/bms/bms_sensors_SMARTLI_RS485_working_corrected.yaml
     vars:
       bms_id: "2" # must be a number
       bms_name: "SMARTLI-BMS 2"
@@ -241,7 +241,7 @@ packages:
       bms_balance_trigger_voltage: "0.010"
   # BMS 3 - SMARTLI RS485 with address 0x02
   bms_3: !include
-    file: packages/bms/bms_sensors_SMARTLI_RS485_shared.yaml
+    file: packages/bms/bms_sensors_SMARTLI_RS485_working_corrected.yaml
     vars:
       bms_id: "3" # must be a number
       bms_name: "SMARTLI-BMS 3"
@@ -258,7 +258,7 @@ packages:
       bms_balance_trigger_voltage: "0.010"
   # BMS 4 - SMARTLI RS485 with address 0x03
   bms_4: !include
-    file: packages/bms/bms_sensors_SMARTLI_RS485_shared.yaml
+    file: packages/bms/bms_sensors_SMARTLI_RS485_working_corrected.yaml
     vars:
       bms_id: "4" # must be a number
       bms_name: "SMARTLI-BMS 4"

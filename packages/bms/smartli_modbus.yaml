@@ -1,0 +1,3890 @@
+
+  - name: battery
+    type: serial
+    method: rtu
+    port: /dev/ttyUSB1
+    baudrate: 9600
+    stopbits: 1
+    bytesize: 8
+    parity: N
+    timeout: 1
+    sensors:    
+#########shoto1      
+
+
+
+      - name: "BMS Alarm1 Raw Battery1"
+        slave: 214
+        address: 4151   # 0x1037
+        input_type: holding
+        data_type: uint16
+        scan_interval: 5
+      - name: "BMS Alarm2 Raw Battery1"
+        slave: 214
+        address: 4152   # 0x1038
+        input_type: holding
+        data_type: uint16
+        scan_interval: 5
+      - name: "BMS Alarm3 Raw Battery1"
+        slave: 214
+        address: 4153   # 0x1039
+        input_type: holding
+        data_type: uint16
+        scan_interval: 5
+      - name: "BMS Alarm4 Raw Battery1"
+        slave: 214
+        address: 4154   # 0x103A
+        input_type: holding
+        data_type: uint16
+        scan_interval: 5
+      - name: "BMS Alarm5 Raw Battery1"
+        slave: 214
+        address: 4155   # 0x103B
+        input_type: holding
+        data_type: uint16
+        scan_interval: 5
+      - name: "BMS Protect Raw Battery1"
+        slave: 214
+        address: 4156   # 0x103C
+        input_type: holding
+        data_type: uint16
+        scan_interval: 5
+        
+        
+      - name: "Shoto1 Charge Status"
+        device_address: 214
+        address: 4221
+        input_type: holding
+        data_type: uint16
+        
+      - name: "Shoto1 Discharge Status"
+        device_address: 214
+        address: 4222
+        input_type: holding
+        data_type: uint16
+ 
+      - name: SHOTO1_V_batt
+        unit_of_measurement: V
+        device_address: 214
+        address: 0
+        input_type: holding
+        data_type: int16
+        precision: 2
+        scale: 0.01
+        device_class: voltage
+        scan_interval: 5
+
+
+
+      - name: SHOTO1_V_pack
+        unit_of_measurement: V
+        device_address: 214
+        address: 1
+        input_type: holding
+        data_type: int16
+        precision: 2
+        scale: 0.01
+        device_class: voltage
+        scan_interval: 5
+        
+      - name: SHOTO1_A
+        unit_of_measurement: A
+        device_address: 214
+        address: 2
+        input_type: holding
+        data_type: int16
+        precision: 2
+        scale: 0.01
+        device_class: current
+        scan_interval: 5
+
+      - name: SHOTO1 SOC
+        unique_id: 'BattSOC'
+        unit_of_measurement: '%'
+        device_address: 214
+        address: 0x1034
+        input_type: holding
+        data_type: uint16
+        scale: 0.01
+        precision: 2
+        scan_interval: 5
+        #device_class: voltage
+
+
+      - name: SHOTO1 SOH0
+        unique_id: 'BattSOH'
+        unit_of_measurement: '%'
+        device_address: 214
+        address: 0x1035
+        input_type: holding
+        data_type: uint16
+        scan_interval: 5
+        scale: 0.01
+        
+      - name: SHOTO1_Max_temp
+        unit_of_measurement: '°C'
+        device_address: 214
+        address: 5
+        input_type: holding
+        data_type: int16
+        precision: 2
+        scan_interval: 5
+        #scale: 0.01
+        
+      - name: SHOTO1_Min_temp
+        unit_of_measurement: °C
+        device_address: 214
+        address: 6
+        input_type: holding
+        data_type: int16
+        precision: 2
+        scan_interval: 5
+        #scale: 0.01
+        
+      - name: SHOTO1_C01
+        unit_of_measurement: V
+        device_address: 214
+        address: 34
+        input_type: holding
+        data_type: int16
+        precision: 3
+        scale: 0.001
+        device_class: voltage
+        scan_interval: 5
+
+      - name: SHOTO1_C02
+        unit_of_measurement: V
+        device_address: 214
+        address: 35
+        input_type: holding
+        data_type: int16
+        precision: 3
+        scale: 0.001
+        device_class: voltage
+        scan_interval: 5
+        
+      - name: SHOTO1_C03
+        unit_of_measurement: V
+        device_address: 214
+        address: 36
+        input_type: holding
+        data_type: int16
+        precision: 3
+        scale: 0.001
+        device_class: voltage
+        scan_interval: 5
+        
+      - name: SHOTO1_C04
+        unit_of_measurement: V
+        device_address: 214
+        address: 37
+        input_type: holding
+        data_type: int16
+        precision: 3
+        scale: 0.001
+        device_class: voltage
+        scan_interval: 5
+        
+      - name: SHOTO1_C05
+        unit_of_measurement: V
+        device_address: 214
+        address: 38
+        input_type: holding
+        data_type: int16
+        precision: 3
+        scale: 0.001
+        device_class: voltage
+        scan_interval: 5
+
+      - name: SHOTO1_C06
+        unit_of_measurement: V
+        device_address: 214
+        address: 39
+        input_type: holding
+        data_type: int16
+        precision: 3
+        scale: 0.001
+        device_class: voltage
+        scan_interval: 5
+        
+      - name: SHOTO1_C07
+        unit_of_measurement: V
+        device_address: 214
+        address: 40
+        input_type: holding
+        data_type: int16
+        precision: 3
+        scale: 0.001
+        device_class: voltage
+        scan_interval: 5
+        
+      - name: SHOTO1_C08
+        unit_of_measurement: V
+        device_address: 214
+        address: 41
+        input_type: holding
+        data_type: int16
+        precision: 3
+        scale: 0.001
+        device_class: voltage
+        scan_interval: 5
+        
+      - name: SHOTO1_C09
+        unit_of_measurement: V
+        device_address: 214
+        address: 42
+        input_type: holding
+        data_type: int16
+        precision: 3
+        scale: 0.001
+        device_class: voltage
+        scan_interval: 5
+        
+      - name: SHOTO1_C10
+        unit_of_measurement: V
+        device_address: 214
+        address: 43
+        input_type: holding
+        data_type: int16
+        precision: 3
+        scale: 0.001
+        device_class: voltage
+        scan_interval: 5
+        
+      - name: SHOTO1_C11
+        unit_of_measurement: V
+        device_address: 214
+        address: 44
+        input_type: holding
+        data_type: int16
+        precision: 3
+        scale: 0.001
+        device_class: voltage
+        scan_interval: 5
+        
+      - name: SHOTO1_C12
+        unit_of_measurement: V
+        device_address: 214
+        address: 45
+        input_type: holding
+        data_type: int16
+        precision: 3
+        scale: 0.001
+        device_class: voltage
+        scan_interval: 5
+        
+      - name: SHOTO1_C13
+        unit_of_measurement: V
+        device_address: 214
+        address: 46
+        input_type: holding
+        data_type: int16
+        precision: 3
+        scale: 0.001
+        device_class: voltage
+        scan_interval: 5
+        
+      - name: SHOTO1_C14
+        unit_of_measurement: V
+        device_address: 214
+        address: 47
+        input_type: holding
+        data_type: int16
+        precision: 3
+        scale: 0.001
+        device_class: voltage
+        scan_interval: 5
+
+      - name: SHOTO1_C15
+        unit_of_measurement: V
+        device_address: 214
+        address: 48
+        input_type: holding
+        data_type: int16
+        precision: 3
+        scale: 0.001
+        device_class: voltage
+        scan_interval: 5
+#shoto discharge
+
+
+
+
+
+
+
+      - name: SHOTO_conecting Battery
+        unit_of_measurement: 'on'
+        slave: 214
+        address: 0x103F
+        scale: 1
+        input_type: holding
+        data_type: uint16
+        precision: 0
+  
+
+      - name: SHOTO_DISCHARGE
+        unit_of_measurement: 'AH'
+        slave: 214
+        address: 0x1042
+        scale: 1
+        input_type: holding
+        data_type: uint32
+        precision: 0
+
+    
+
+
+
+
+
+      - name: SHOTO_DISCHARGETIMES
+        unit_of_measurement: 'Times'
+        slave: 214
+        address: 0x1033
+        scale: 1
+        input_type: holding
+        data_type: uint16
+        precision: 0
+
+        
+       #######paramter soto 
+      - name: SHOTO1_Charging
+        unit_of_measurement: 'mode'
+        device_address: 214
+        address: 0x107D
+        input_type: holding
+        data_type: uint16
+        
+        
+        
+        
+      - name: SHOTO MODE
+        
+        device_address: 214
+        address: 4118
+        input_type: holding
+        data_type: uint16
+        
+        
+        
+
+
+
+      - name: Discharge BUS voltage set
+        unit_of_measurement: 'V'
+        device_address: 214
+        address: 0x1010
+        input_type: holding
+        data_type: uint16
+        precision: 2
+        scale: 0.01
+        device_class: voltage
+        scan_interval: 5
+
+      - name: Discharge BUS current setting
+        unit_of_measurement: '%'
+        device_address: 214
+        address: 0x1011
+        input_type: holding
+        data_type: uint16
+        scale: 0.01
+        scan_interval: 5
+        
+      - name: Discharge BUS Power Set 1
+        unit_of_measurement: '%'
+        device_address: 214
+        address: 0x1012
+        input_type: holding
+        data_type: uint16
+        scale: 0.01
+        scan_interval: 5
+
+      - name: Average charge current setting battery1
+        unit_of_measurement: '%'
+        device_address: 214
+        address: 0x1013
+        input_type: holding
+        data_type: uint16
+        precision: 1
+        scale: 0.01
+  
+      - name: Discharge BUS voltage step 
+        unit_of_measurement: 'V'
+        device_address: 214
+        address: 0x1014
+        input_type: holding
+        data_type: uint16
+        scan_interval: 5
+        scale: 0.01
+
+      - name: Depth of discharge
+        unit_of_measurement: '%'
+        device_address: 214
+        address: 0x1015
+        input_type: holding
+        data_type: uint16
+        scan_interval: 5
+        scale: 0.01
+       
+      - name: operating status battery1
+        device_address: 214
+        address: 0x103D
+        input_type: holding
+        data_type: uint16
+        scan_interval: 5
+         
+         
+      - name: Ibus
+        unit_of_measurement: A
+        device_address: 214
+        address: 0x1030
+        input_type: holding
+        data_type: int16
+        precision: 2
+        scale: 0.01
+        device_class: current
+        scan_interval: 5         
+         
+      - name: ibat1
+        unit_of_measurement: A
+        device_address: 214
+        address: 0x1031
+        input_type: holding
+        data_type: int16
+        precision: 2
+        scale: 0.01
+        device_class: current
+        scan_interval: 5       
+         
+         
+         
+         
+         
+         
+     ###pramter soto   
+        
+        
+        
+        ######################## SHOTO TEMP
+        
+      - name: SHOTO1_temp
+        unit_of_measurement: °C
+        device_address: 214
+        address: 18
+        input_type: holding
+        data_type: int16
+        precision: 2
+        scan_interval: 5
+        #scale: 0.01
+        
+      - name: SHOTO2_temp
+        unit_of_measurement: °C
+        device_address: 214
+        address: 19
+        input_type: holding
+        data_type: int16
+        precision: 2
+        scan_interval: 5
+        #scale: 0.01
+      - name: SHOTO3_temp
+        unit_of_measurement: °C
+        device_address: 214
+        address: 20
+        input_type: holding
+        data_type: int16
+        precision: 2
+        scan_interval: 5
+        #scale: 0.01
+      - name: SHOTO4_temp
+        unit_of_measurement: °C
+        device_address: 214
+        address: 21
+        input_type: holding
+        data_type: int16
+        precision: 2
+        scan_interval: 5
+        #scale: 0.01
+        
+        
+      - name: SHOTO1_REMAINAH
+        unit_of_measurement: 'AH'
+        device_address: 214
+        address: 4146
+        input_type: holding
+        data_type: uint16
+        precision: 1
+        scale: 0.01
+##############shOTO2
+
+##############shOTO2
+      # ===== Battery 2 =====
+      - name: "BMS Alarm1 Raw Battery2"
+        slave: 215
+        address: 4151   # 0x1037
+        input_type: holding
+        data_type: uint16
+        scan_interval: 5
+      - name: "BMS Alarm2 Raw Battery2"
+        slave: 215
+        address: 4152   # 0x1038
+        input_type: holding
+        data_type: uint16
+        scan_interval: 5
+      - name: "BMS Alarm3 Raw Battery2"
+        slave: 215
+        address: 4153   # 0x1039
+        input_type: holding
+        data_type: uint16
+        scan_interval: 5
+      - name: "BMS Alarm4 Raw Battery2"
+        slave: 215
+        address: 4154   # 0x103A
+        input_type: holding
+        data_type: uint16
+        scan_interval: 5
+      - name: "BMS Alarm5 Raw Battery2"
+        slave: 215
+        address: 4155   # 0x103B
+        input_type: holding
+        data_type: uint16
+        scan_interval: 5
+      - name: "BMS Protect Raw Battery2"
+        slave: 215
+        address: 4156   # 0x103C
+        input_type: holding
+        data_type: uint16
+        scan_interval: 5
+
+
+      - name: operating status battery2
+        device_address: 215
+        address: 0x103D
+        input_type: holding
+        data_type: uint16
+        scan_interval: 5
+        
+      - name: "Shoto2 Charge Status"
+        device_address: 215
+        address: 4221
+        input_type: holding
+        data_type: uint16
+        
+      - name: "Shoto2 Discharge Status"
+        device_address: 215
+        address: 4222
+        input_type: holding
+        data_type: uint16
+        
+      - name: SHOTO2_REMAINAH
+        unit_of_measurement: 'AH'
+        device_address: 215
+        address: 4146
+        input_type: holding
+        data_type: uint16
+        precision: 1
+        scale: 0.01
+      - name: SHOTO2_V_batt
+        unit_of_measurement: V
+        device_address: 215
+        address: 0
+        input_type: holding
+        data_type: int16
+        precision: 2
+        scale: 0.01
+        device_class: voltage
+        scan_interval: 5
+
+      - name: SHOTO2_V_pack
+        unit_of_measurement: V
+        device_address: 215
+        address: 1
+        input_type: holding
+        data_type: int16
+        precision: 2
+        scale: 0.01
+        device_class: voltage
+        scan_interval: 5
+        
+      - name: SHOTO2_A
+        unit_of_measurement: A
+        device_address: 215
+        address: 2
+        input_type: holding
+        data_type: int16
+        precision: 2
+        scale: 0.01
+        device_class: current
+        scan_interval: 5
+
+      - name: SHOTO2 SOC
+        unique_id: 'shoto2_soc'
+        unit_of_measurement: '%'
+        device_address: 215
+        address: 0x1034
+        input_type: holding
+        data_type: uint16
+        scale: 0.01
+        precision: 2
+        scan_interval: 5
+
+      - name: SHOTO2_Max_temp
+        unit_of_measurement: '°C'
+        device_address: 215
+        address: 5
+        input_type: holding
+        data_type: int16
+        precision: 2
+        scan_interval: 5
+        #scale: 0.01
+        
+      - name: SHOTO2_Min_temp
+        unit_of_measurement: '°C'
+        device_address: 215
+        address: 6
+        input_type: holding
+        data_type: int16
+        precision: 2
+        scan_interval: 5
+        #scale: 0.01
+        
+      - name: SHOTO2_C01
+        unit_of_measurement: V
+        device_address: 215
+        address: 34
+        input_type: holding
+        data_type: int16
+        precision: 3
+        scale: 0.001
+        device_class: voltage
+        scan_interval: 5
+
+      - name: SHOTO2_C02
+        unit_of_measurement: V
+        device_address: 215
+        address: 35
+        input_type: holding
+        data_type: int16
+        precision: 3
+        scale: 0.001
+        device_class: voltage
+        scan_interval: 5
+        
+      - name: SHOTO2_C03
+        unit_of_measurement: V
+        device_address: 215
+        address: 36
+        input_type: holding
+        data_type: int16
+        precision: 3
+        scale: 0.001
+        device_class: voltage
+        scan_interval: 5
+        
+      - name: SHOTO2_C04
+        unit_of_measurement: V
+        device_address: 215
+        address: 37
+        input_type: holding
+        data_type: int16
+        precision: 3
+        scale: 0.001
+        device_class: voltage
+        scan_interval: 5
+        
+      - name: SHOTO2_C05
+        unit_of_measurement: V
+        device_address: 215
+        address: 38
+        input_type: holding
+        data_type: int16
+        precision: 3
+        scale: 0.001
+        device_class: voltage
+        scan_interval: 5
+
+      - name: SHOTO2_C06
+        unit_of_measurement: V
+        device_address: 215
+        address: 39
+        input_type: holding
+        data_type: int16
+        precision: 3
+        scale: 0.001
+        device_class: voltage
+        scan_interval: 5
+        
+      - name: SHOTO2_C07
+        unit_of_measurement: V
+        device_address: 215
+        address: 40
+        input_type: holding
+        data_type: int16
+        precision: 3
+        scale: 0.001
+        device_class: voltage
+        scan_interval: 5
+        
+      - name: SHOTO2_C08
+        unit_of_measurement: V
+        device_address: 215
+        address: 41
+        input_type: holding
+        data_type: int16
+        precision: 3
+        scale: 0.001
+        device_class: voltage
+        scan_interval: 5
+        
+      - name: SHOTO2_C09
+        unit_of_measurement: V
+        device_address: 215
+        address: 42
+        input_type: holding
+        data_type: int16
+        precision: 3
+        scale: 0.001
+        device_class: voltage
+        scan_interval: 5
+        
+      - name: SHOTO2_C10
+        unit_of_measurement: V
+        device_address: 215
+        address: 43
+        input_type: holding
+        data_type: int16
+        precision: 3
+        scale: 0.001
+        device_class: voltage
+        scan_interval: 5
+        
+      - name: SHOTO2_C11
+        unit_of_measurement: V
+        device_address: 215
+        address: 44
+        input_type: holding
+        data_type: int16
+        precision: 3
+        scale: 0.001
+        device_class: voltage
+        scan_interval: 5
+        
+      - name: SHOTO2_C12
+        unit_of_measurement: V
+        device_address: 215
+        address: 45
+        input_type: holding
+        data_type: int16
+        precision: 3
+        scale: 0.001
+        device_class: voltage
+        scan_interval: 5
+        
+      - name: SHOTO2_C13
+        unit_of_measurement: V
+        device_address: 215
+        address: 46
+        input_type: holding
+        data_type: int16
+        precision: 3
+        scale: 0.001
+        device_class: voltage
+        scan_interval: 5
+        
+      - name: SHOTO2_C14
+        unit_of_measurement: V
+        device_address: 215
+        address: 47
+        input_type: holding
+        data_type: int16
+        precision: 3
+        scale: 0.001
+        device_class: voltage
+        scan_interval: 5
+
+      - name: SHOTO2_C15
+        unit_of_measurement: V
+        device_address: 215
+        address: 48
+        input_type: holding
+        data_type: int16
+        precision: 3
+        scale: 0.001
+        device_class: voltage
+        scan_interval: 5
+#shoto discharge
+
+      - name: SHOTO2_DISCHARGETIMES
+        unit_of_measurement: 'Times'
+        slave: 215
+        scale: 0.1
+        address: 67
+        input_type: holding
+        data_type: int16
+        precision: 0
+
+      - name: SHOTO2_DISCHARGE
+        unit_of_measurement: 'Ah'
+        slave: 215
+        address: 69
+        input_type: holding
+        data_type: int16
+        precision: 0
+       ##############SHOTO DIF
+        
+      - name: Average charge current setting battery2
+        unit_of_measurement: '%'
+        device_address: 215
+        address: 0x1013
+        input_type: holding
+        data_type: uint16
+        precision: 1
+        scale: 0.01
+   
+      - name: Discharge BUS Power Set 2
+        unit_of_measurement: '%'
+        device_address: 215
+        address: 0x1012
+        input_type: holding
+        data_type: uint16
+        scale: 0.01
+        scan_interval: 5      
+        
+        
+      - name: ibat2
+        unit_of_measurement: A
+        device_address: 215
+        address: 0x1031
+        input_type: holding
+        data_type: int16
+        precision: 2
+        scale: 0.01
+        device_class: current
+        scan_interval: 5       
+         
+        ######################## SHOTO2 TEMP
+        
+      - name: SHOTO2_1temp
+        unit_of_measurement: '°C'
+        device_address: 215
+        address: 18
+        input_type: holding
+        data_type: int16
+        precision: 2
+        scan_interval: 5
+        #scale: 0.01
+        
+      - name: SHOTO2_2temp
+        unit_of_measurement: '°C'
+        device_address: 215
+        address: 19
+        input_type: holding
+        data_type: int16
+        precision: 2
+        scan_interval: 5
+        #scale: 0.01
+      - name: SHOTO2_3temp
+        unit_of_measurement: '°C'
+        device_address: 215
+        address: 20
+        input_type: holding
+        data_type: int16
+        precision: 2
+        scan_interval: 5
+        #scale: 0.01
+      - name: SHOTO2_4temp
+        unit_of_measurement: '°C'
+        device_address: 215
+        address: 21
+        input_type: holding
+        data_type: int16
+        precision: 2
+        scan_interval: 5
+        #scale: 0.01
+#shoto3
+    # ===== Battery 3 =====
+      - name: "BMS Alarm1 Raw Battery3"
+        slave: 216
+        address: 4151
+        input_type: holding
+        data_type: uint16
+        scan_interval: 5
+      - name: "BMS Alarm2 Raw Battery3"
+        slave: 216
+        address: 4152
+        input_type: holding
+        data_type: uint16
+        scan_interval: 5
+      - name: "BMS Alarm3 Raw Battery3"
+        slave: 216
+        address: 4153
+        input_type: holding
+        data_type: uint16
+        scan_interval: 5
+      - name: "BMS Alarm4 Raw Battery3"
+        slave: 216
+        address: 4154
+        input_type: holding
+        data_type: uint16
+        scan_interval: 5
+      - name: "BMS Alarm5 Raw Battery3"
+        slave: 216
+        address: 4155
+        input_type: holding
+        data_type: uint16
+        scan_interval: 5
+      - name: "BMS Protect Raw Battery3"
+        slave: 216
+        address: 4156
+        input_type: holding
+        data_type: uint16
+        scan_interval: 5
+      - name: operating status battery3
+        device_address: 216
+        address: 0x103D
+        input_type: holding
+        data_type: uint16
+        scan_interval: 5
+        
+      - name: "Shoto3 Charge Status"
+        device_address: 216
+        address: 4221
+        input_type: holding
+        data_type: uint16
+        
+      - name: "Shoto3 Discharge Status"
+        device_address: 216
+        address: 4222
+        input_type: holding
+        data_type: uint16
+        
+      - name: SHOTO3_REMAINAH
+        unit_of_measurement: 'AH'
+        device_address: 216
+        address: 4146
+        input_type: holding
+        data_type: uint16
+        precision: 1
+        scale: 0.01
+      - name: ibat3
+        unit_of_measurement: A
+        device_address: 216
+        address: 0x1031
+        input_type: holding
+        data_type: int16
+        precision: 2
+        scale: 0.01
+        device_class: current
+        scan_interval: 5       
+         
+ 
+      - name: SHOTO3_V_batt
+        unit_of_measurement: V
+        device_address: 216
+        address: 0
+        input_type: holding
+        data_type: int16
+        precision: 2
+        scale: 0.01
+        device_class: voltage
+        scan_interval: 5
+
+      - name: SHOTO3_V_pack
+        unit_of_measurement: V
+        device_address: 216
+        address: 1
+        input_type: holding
+        data_type: int16
+        precision: 2
+        scale: 0.01
+        device_class: voltage
+        scan_interval: 5
+        
+      - name: SHOTO3_A
+        unit_of_measurement: A
+        device_address: 216
+        address: 2
+        input_type: holding
+        data_type: int16
+        precision: 2
+        scale: 0.01
+        device_class: current
+        scan_interval: 5
+
+
+      - name: shoto3_soc
+        unique_id: 'shoto3_soc'
+        unit_of_measurement: '%'
+        device_address: 216
+        address: 0x1034
+        input_type: holding
+        data_type: uint16
+        scale: 0.01
+        precision: 2
+        scan_interval: 5
+
+
+
+      - name: SHOTO3_Max_temp
+        unit_of_measurement: '°C'
+        device_address: 216
+        address: 5
+        input_type: holding
+        data_type: int16
+        precision: 2
+        scan_interval: 5
+        #scale: 0.01
+        
+      - name: SHOTO3_Min_temp
+        unit_of_measurement: '°C'
+        device_address: 216
+        address: 6
+        input_type: holding
+        data_type: int16
+        precision: 2
+        scan_interval: 5
+        #scale: 0.01
+        
+      - name: SHOTO3_C01
+        unit_of_measurement: V
+        device_address: 216
+        address: 34
+        input_type: holding
+        data_type: int16
+        precision: 3
+        scale: 0.001
+        device_class: voltage
+        scan_interval: 5
+
+      - name: SHOTO3_C02
+        unit_of_measurement: V
+        device_address: 216
+        address: 35
+        input_type: holding
+        data_type: int16
+        precision: 3
+        scale: 0.001
+        device_class: voltage
+        scan_interval: 5
+        
+      - name: SHOTO3_C03
+        unit_of_measurement: V
+        device_address: 216
+        address: 36
+        input_type: holding
+        data_type: int16
+        precision: 3
+        scale: 0.001
+        device_class: voltage
+        scan_interval: 5
+        
+      - name: SHOTO3_C04
+        unit_of_measurement: V
+        device_address: 216
+        address: 37
+        input_type: holding
+        data_type: int16
+        precision: 3
+        scale: 0.001
+        device_class: voltage
+        scan_interval: 5
+        
+      - name: SHOTO3_C05
+        unit_of_measurement: V
+        device_address: 216
+        address: 38
+        input_type: holding
+        data_type: int16
+        precision: 3
+        scale: 0.001
+        device_class: voltage
+        scan_interval: 5
+
+      - name: SHOTO3_C06
+        unit_of_measurement: V
+        device_address: 216
+        address: 39
+        input_type: holding
+        data_type: int16
+        precision: 3
+        scale: 0.001
+        device_class: voltage
+        scan_interval: 5
+        
+      - name: SHOTO3_C07
+        unit_of_measurement: V
+        device_address: 216
+        address: 40
+        input_type: holding
+        data_type: int16
+        precision: 3
+        scale: 0.001
+        device_class: voltage
+        scan_interval: 5
+        
+      - name: SHOTO3_C08
+        unit_of_measurement: V
+        device_address: 216
+        address: 41
+        input_type: holding
+        data_type: int16
+        precision: 3
+        scale: 0.001
+        device_class: voltage
+        scan_interval: 5
+        
+      - name: SHOTO3_C09
+        unit_of_measurement: V
+        device_address: 216
+        address: 42
+        input_type: holding
+        data_type: int16
+        precision: 3
+        scale: 0.001
+        device_class: voltage
+        scan_interval: 5
+        
+      - name: SHOTO3_C10
+        unit_of_measurement: V
+        device_address: 216
+        address: 43
+        input_type: holding
+        data_type: int16
+        precision: 3
+        scale: 0.001
+        device_class: voltage
+        scan_interval: 5
+        
+      - name: SHOTO3_C11
+        unit_of_measurement: V
+        device_address: 216
+        address: 44
+        input_type: holding
+        data_type: int16
+        precision: 3
+        scale: 0.001
+        device_class: voltage
+        scan_interval: 5
+        
+      - name: SHOTO3_C12
+        unit_of_measurement: V
+        device_address: 216
+        address: 45
+        input_type: holding
+        data_type: int16
+        precision: 3
+        scale: 0.001
+        device_class: voltage
+        scan_interval: 5
+        
+      - name: SHOTO3_C13
+        unit_of_measurement: V
+        device_address: 216
+        address: 46
+        input_type: holding
+        data_type: int16
+        precision: 3
+        scale: 0.001
+        device_class: voltage
+        scan_interval: 5
+        
+      - name: SHOTO3_C14
+        unit_of_measurement: V
+        device_address: 216
+        address: 47
+        input_type: holding
+        data_type: int16
+        precision: 3
+        scale: 0.001
+        device_class: voltage
+        scan_interval: 5
+
+      - name: SHOTO3_C15
+        unit_of_measurement: V
+        device_address: 216
+        address: 48
+        input_type: holding
+        data_type: int16
+        precision: 3
+        scale: 0.001
+        device_class: voltage
+        scan_interval: 5
+#shoto 3 discharge
+
+
+
+
+      - name: SHOTO3_DISCHARGETIMES
+        unit_of_measurement: 'Times'
+        slave: 216
+        scale: 0.1
+        address: 67
+        input_type: holding
+        data_type: int16
+        precision: 0
+
+      - name: SHOTO3_DISCHARGE
+        unit_of_measurement: 'Ah'
+        slave: 216
+        address: 69
+        input_type: holding
+        data_type: int16
+        precision: 0
+        
+        
+      - name: Discharge BUS Power Set 3
+        unit_of_measurement: '%'
+        device_address: 216
+        address: 0x1012
+        input_type: holding
+        data_type: uint16
+        scale: 0.01
+        scan_interval: 5        
+        
+        
+
+        ######################## SHOTO3TEMP
+        
+      - name: SHOTO3_temp1
+        unit_of_measurement: '°C'
+        device_address: 216
+        address: 18
+        input_type: holding
+        data_type: int16
+        precision: 2
+        scan_interval: 5
+        #scale: 0.01
+        
+      - name: SHOTO3_temp2
+        unit_of_measurement: '°C'
+        device_address: 216
+        address: 19
+        input_type: holding
+        data_type: int16
+        precision: 2
+        scan_interval: 5
+        #scale: 0.01
+      - name: SHOTO3_temp3
+        unit_of_measurement: '°C'
+        device_address: 216
+        address: 20
+        input_type: holding
+        data_type: int16
+        precision: 2
+        scan_interval: 5
+        #scale: 0.01
+      - name: SHOTO3_temp4
+        unit_of_measurement: '°C'
+        device_address: 216
+        address: 21
+        input_type: holding
+        data_type: int16
+        precision: 2
+        scan_interval: 5
+        #scale: 0.01  
+        
+      - name: Average charge current setting battery3
+        unit_of_measurement: '%'
+        device_address: 216
+        address: 0x1013
+        input_type: holding
+        data_type: uint16
+        precision: 1
+        scale: 0.01
+          
+### shoto4
+      # ===== Battery 4 =====
+      - name: "BMS Alarm1 Raw Battery4"
+        slave: 217
+        address: 4151
+        input_type: holding
+        data_type: uint16
+        scan_interval: 5
+      - name: "BMS Alarm2 Raw Battery4"
+        slave: 217
+        address: 4152
+        input_type: holding
+        data_type: uint16
+        scan_interval: 5
+      - name: "BMS Alarm3 Raw Battery4"
+        slave: 217
+        address: 4153
+        input_type: holding
+        data_type: uint16
+        scan_interval: 5
+      - name: "BMS Alarm4 Raw Battery4"
+        slave: 217
+        address: 4154
+        input_type: holding
+        data_type: uint16
+        scan_interval: 5
+      - name: "BMS Alarm5 Raw Battery4"
+        slave: 217
+        address: 4155
+        input_type: holding
+        data_type: uint16
+        scan_interval: 5
+      - name: "BMS Protect Raw Battery4"
+        slave: 217
+        address: 4156
+        input_type: holding
+        data_type: uint16
+        scan_interval: 5
+      - name: operating status battery4
+        device_address: 217
+        address: 0x103D
+        input_type: holding
+        data_type: uint16
+        scan_interval: 5
+        
+        
+      - name: "Shoto4 Charge Status"
+        device_address: 217
+        address: 4221
+        input_type: holding
+        data_type: uint16
+        
+      - name: "Shoto4 Discharge Status"
+        device_address: 217
+        address: 4222
+        input_type: holding
+        data_type: uint16
+        
+      - name: SHOTO4_REMAINAH
+        unit_of_measurement: 'AH'
+        device_address: 217
+        address: 4146
+        input_type: holding
+        data_type: uint16
+        precision: 1
+        scale: 0.01
+      - name: ibat4
+        unit_of_measurement: A
+        device_address: 217
+        address: 0x1031
+        input_type: holding
+        data_type: int16
+        precision: 2
+        scale: 0.01
+        device_class: current
+        scan_interval: 5       
+         
+      - name: shoto4_V_batt
+        unit_of_measurement: V
+        device_address: 217
+        address: 0
+        input_type: holding
+        data_type: int16
+        precision: 2
+        scale: 0.01
+        device_class: voltage
+        scan_interval: 5
+
+      - name: shoto4_V_pack
+        unit_of_measurement: V
+        device_address: 217
+        address: 1
+        input_type: holding
+        data_type: int16
+        precision: 2
+        scale: 0.01
+        device_class: voltage
+        scan_interval: 5
+        
+      - name: shoto4_A
+        unit_of_measurement: A
+        device_address: 217
+        address: 2
+        input_type: holding
+        data_type: int16
+        precision: 2
+        scale: 0.01
+        device_class: current
+        scan_interval: 5
+
+
+      - name: shoto4_soc
+        unique_id: 'shoto4_soc'
+        unit_of_measurement: '%'
+        device_address: 217
+        address: 0x1034
+        input_type: holding
+        data_type: uint16
+        scale: 0.01
+        precision: 2
+        scan_interval: 5
+
+
+
+      - name: shoto4_Max_temp
+        unit_of_measurement: '°C'
+        device_address: 217
+        address: 5
+        input_type: holding
+        data_type: int16
+        precision: 2
+        scan_interval: 5
+        #scale: 0.01
+        
+      - name: shoto4_Min_temp
+        unit_of_measurement: '°C'
+        device_address: 217
+        address: 6
+        input_type: holding
+        data_type: int16
+        precision: 2
+        scan_interval: 5
+        #scale: 0.01
+        
+      - name: shoto4_C01
+        unit_of_measurement: V
+        device_address: 217
+        address: 34
+        input_type: holding
+        data_type: int16
+        precision: 3
+        scale: 0.001
+        device_class: voltage
+        scan_interval: 5
+
+      - name: shoto4_C02
+        unit_of_measurement: V
+        device_address: 217
+        address: 35
+        input_type: holding
+        data_type: int16
+        precision: 3
+        scale: 0.001
+        device_class: voltage
+        scan_interval: 5
+        
+      - name: shoto4_C03
+        unit_of_measurement: V
+        device_address: 217
+        address: 36
+        input_type: holding
+        data_type: int16
+        precision: 3
+        scale: 0.001
+        device_class: voltage
+        scan_interval: 5
+        
+      - name: shoto4_C04
+        unit_of_measurement: V
+        device_address: 217
+        address: 37
+        input_type: holding
+        data_type: int16
+        precision: 3
+        scale: 0.001
+        device_class: voltage
+        scan_interval: 5
+        
+      - name: shoto4_C05
+        unit_of_measurement: V
+        device_address: 217
+        address: 38
+        input_type: holding
+        data_type: int16
+        precision: 3
+        scale: 0.001
+        device_class: voltage
+        scan_interval: 5
+
+      - name: shoto4_C06
+        unit_of_measurement: V
+        device_address: 217
+        address: 39
+        input_type: holding
+        data_type: int16
+        precision: 3
+        scale: 0.001
+        device_class: voltage
+        scan_interval: 5
+        
+      - name: shoto4_C07
+        unit_of_measurement: V
+        device_address: 217
+        address: 40
+        input_type: holding
+        data_type: int16
+        precision: 3
+        scale: 0.001
+        device_class: voltage
+        scan_interval: 5
+        
+      - name: shoto4_C08
+        unit_of_measurement: V
+        device_address: 217
+        address: 41
+        input_type: holding
+        data_type: int16
+        precision: 3
+        scale: 0.001
+        device_class: voltage
+        scan_interval: 5
+        
+      - name: shoto4_C09
+        unit_of_measurement: V
+        device_address: 217
+        address: 42
+        input_type: holding
+        data_type: int16
+        precision: 3
+        scale: 0.001
+        device_class: voltage
+        scan_interval: 5
+        
+      - name: shoto4_C10
+        unit_of_measurement: V
+        device_address: 217
+        address: 43
+        input_type: holding
+        data_type: int16
+        precision: 3
+        scale: 0.001
+        device_class: voltage
+        scan_interval: 5
+        
+      - name: shoto4_C11
+        unit_of_measurement: V
+        device_address: 217
+        address: 44
+        input_type: holding
+        data_type: int16
+        precision: 3
+        scale: 0.001
+        device_class: voltage
+        scan_interval: 5
+        
+      - name: shoto4_C12
+        unit_of_measurement: V
+        device_address: 217
+        address: 45
+        input_type: holding
+        data_type: int16
+        precision: 3
+        scale: 0.001
+        device_class: voltage
+        scan_interval: 5
+        
+      - name: shoto4_C13
+        unit_of_measurement: V
+        device_address: 217
+        address: 46
+        input_type: holding
+        data_type: int16
+        precision: 3
+        scale: 0.001
+        device_class: voltage
+        scan_interval: 5
+        
+      - name: shoto4_C14
+        unit_of_measurement: V
+        device_address: 217
+        address: 47
+        input_type: holding
+        data_type: int16
+        precision: 3
+        scale: 0.001
+        device_class: voltage
+        scan_interval: 5
+
+      - name: shoto4_C15
+        unit_of_measurement: V
+        device_address: 217
+        address: 48
+        input_type: holding
+        data_type: int16
+        precision: 3
+        scale: 0.001
+        device_class: voltage
+        scan_interval: 5
+#shoto 3 discharge
+
+
+
+
+      - name: shoto4_DISCHARGETIMES
+        unit_of_measurement: 'Times'
+        slave: 217
+        scale: 0.1
+        address: 67
+        input_type: holding
+        data_type: int16
+        precision: 0
+
+      - name: shoto4_DISCHARGE
+        unit_of_measurement: 'Ah'
+        slave: 217
+        address: 69
+        input_type: holding
+        data_type: int16
+        precision: 0
+        
+      - name: Discharge BUS Power Set 4
+        unit_of_measurement: '%'
+        device_address: 217
+        address: 0x1012
+        input_type: holding
+        data_type: uint16
+        scale: 0.01
+        scan_interval: 5
+        
+        
+        
+        
+
+        ######################## shoto4TEMP
+        
+      - name: shoto4_temp1
+        unit_of_measurement: '°C'
+        device_address: 217
+        address: 18
+        input_type: holding
+        data_type: int16
+        precision: 2
+        scan_interval: 5
+        #scale: 0.01
+        
+      - name: shoto4_temp2
+        unit_of_measurement: '°C'
+        device_address: 217
+        address: 19
+        input_type: holding
+        data_type: int16
+        precision: 2
+        scan_interval: 5
+        #scale: 0.01
+      - name: shoto4_temp3
+        unit_of_measurement: '°C'
+        device_address: 217
+        address: 20
+        input_type: holding
+        data_type: int16
+        precision: 2
+        scan_interval: 5
+        #scale: 0.01
+      - name: shoto4_temp4
+        unit_of_measurement: '°C'
+        device_address: 217
+        address: 21
+        input_type: holding
+        data_type: int16
+        precision: 2
+        scan_interval: 5
+        #scale: 0.01  
+        
+      - name: Average charge current setting battery4
+        unit_of_measurement: '%'
+        device_address: 217
+        address: 0x1013
+        input_type: holding
+        data_type: uint16
+        precision: 1
+        scale: 0.01
+#shoto5
+
+   # ===== Battery 5 =====
+      - name: "BMS Alarm1 Raw Battery5"
+        slave: 218
+        address: 4151
+        input_type: holding
+        data_type: uint16
+        scan_interval: 5
+      - name: "BMS Alarm2 Raw Battery5"
+        slave: 218
+        address: 4152
+        input_type: holding
+        data_type: uint16
+        scan_interval: 5
+      - name: "BMS Alarm3 Raw Battery5"
+        slave: 218
+        address: 4153
+        input_type: holding
+        data_type: uint16
+        scan_interval: 5
+      - name: "BMS Alarm4 Raw Battery5"
+        slave: 218
+        address: 4154
+        input_type: holding
+        data_type: uint16
+        scan_interval: 5
+      - name: "BMS Alarm5 Raw Battery5"
+        slave: 218
+        address: 4155
+        input_type: holding
+        data_type: uint16
+        scan_interval: 5
+      - name: "BMS Protect Raw Battery5"
+        slave: 218
+        address: 4156
+        input_type: holding
+        data_type: uint16
+        scan_interval: 5        
+      - name: operating status battery5
+        device_address: 218
+        address: 0x103D
+        input_type: holding
+        data_type: uint16
+        scan_interval: 5
+        
+        
+
+      - name: "Shoto5 Charge Status"
+        device_address: 218
+        address: 4221
+        input_type: holding
+        data_type: uint16
+        
+      - name: "Shoto5 Discharge Status"
+        device_address: 218
+        address: 4222
+        input_type: holding
+        data_type: uint16
+        
+        
+      - name: SHOTO5_REMAINAH
+        unit_of_measurement: 'AH'
+        device_address: 218
+        address: 4146
+        input_type: holding
+        data_type: uint16
+        precision: 1
+        scale: 0.01
+      - name: ibat5
+        unit_of_measurement: A
+        device_address: 218
+        address: 0x1031
+        input_type: holding
+        data_type: int16
+        precision: 2
+        scale: 0.01
+        device_class: current
+        scan_interval: 5       
+         
+      - name: shoto5_V_batt
+        unit_of_measurement: V
+        device_address: 218
+        address: 0
+        input_type: holding
+        data_type: int16
+        precision: 2
+        scale: 0.01
+        device_class: voltage
+        scan_interval: 5
+
+      - name: shoto5_V_pack
+        unit_of_measurement: V
+        device_address: 218
+        address: 1
+        input_type: holding
+        data_type: int16
+        precision: 2
+        scale: 0.01
+        device_class: voltage
+        scan_interval: 5
+        
+      - name: shoto5_A
+        unit_of_measurement: A
+        device_address: 218
+        address: 2
+        input_type: holding
+        data_type: int16
+        precision: 2
+        scale: 0.01
+        device_class: current
+        scan_interval: 5
+
+
+      - name: shoto5_soc
+        unique_id: 'shoto5_soc'
+        unit_of_measurement: '%'
+        device_address: 218
+        address: 0x1034
+        input_type: holding
+        data_type: uint16
+        scale: 0.01
+        precision: 2
+        scan_interval: 5
+
+
+
+      - name: shoto5_Max_temp
+        unit_of_measurement: '°C'
+        device_address: 218
+        address: 5
+        input_type: holding
+        data_type: int16
+        precision: 2
+        scan_interval: 5
+        #scale: 0.01
+        
+      - name: shoto5_Min_temp
+        unit_of_measurement: '°C'
+        device_address: 218
+        address: 6
+        input_type: holding
+        data_type: int16
+        precision: 2
+        scan_interval: 5
+        #scale: 0.01
+        
+      - name: shoto5_C01
+        unit_of_measurement: V
+        device_address: 218
+        address: 34
+        input_type: holding
+        data_type: int16
+        precision: 3
+        scale: 0.001
+        device_class: voltage
+        scan_interval: 5
+
+      - name: shoto5_C02
+        unit_of_measurement: V
+        device_address: 218
+        address: 35
+        input_type: holding
+        data_type: int16
+        precision: 3
+        scale: 0.001
+        device_class: voltage
+        scan_interval: 5
+        
+      - name: shoto5_C03
+        unit_of_measurement: V
+        device_address: 218
+        address: 36
+        input_type: holding
+        data_type: int16
+        precision: 3
+        scale: 0.001
+        device_class: voltage
+        scan_interval: 5
+        
+      - name: shoto5_C04
+        unit_of_measurement: V
+        device_address: 218
+        address: 37
+        input_type: holding
+        data_type: int16
+        precision: 3
+        scale: 0.001
+        device_class: voltage
+        scan_interval: 5
+        
+      - name: shoto5_C05
+        unit_of_measurement: V
+        device_address: 218
+        address: 38
+        input_type: holding
+        data_type: int16
+        precision: 3
+        scale: 0.001
+        device_class: voltage
+        scan_interval: 5
+
+      - name: shoto5_C06
+        unit_of_measurement: V
+        device_address: 218
+        address: 39
+        input_type: holding
+        data_type: int16
+        precision: 3
+        scale: 0.001
+        device_class: voltage
+        scan_interval: 5
+        
+      - name: shoto5_C07
+        unit_of_measurement: V
+        device_address: 218
+        address: 40
+        input_type: holding
+        data_type: int16
+        precision: 3
+        scale: 0.001
+        device_class: voltage
+        scan_interval: 5
+        
+      - name: shoto5_C08
+        unit_of_measurement: V
+        device_address: 218
+        address: 41
+        input_type: holding
+        data_type: int16
+        precision: 3
+        scale: 0.001
+        device_class: voltage
+        scan_interval: 5
+        
+      - name: shoto5_C09
+        unit_of_measurement: V
+        device_address: 218
+        address: 42
+        input_type: holding
+        data_type: int16
+        precision: 3
+        scale: 0.001
+        device_class: voltage
+        scan_interval: 5
+        
+      - name: shoto5_C10
+        unit_of_measurement: V
+        device_address: 218
+        address: 43
+        input_type: holding
+        data_type: int16
+        precision: 3
+        scale: 0.001
+        device_class: voltage
+        scan_interval: 5
+        
+      - name: shoto5_C11
+        unit_of_measurement: V
+        device_address: 218
+        address: 44
+        input_type: holding
+        data_type: int16
+        precision: 3
+        scale: 0.001
+        device_class: voltage
+        scan_interval: 5
+        
+      - name: shoto5_C12
+        unit_of_measurement: V
+        device_address: 218
+        address: 45
+        input_type: holding
+        data_type: int16
+        precision: 3
+        scale: 0.001
+        device_class: voltage
+        scan_interval: 5
+        
+      - name: shoto5_C13
+        unit_of_measurement: V
+        device_address: 218
+        address: 46
+        input_type: holding
+        data_type: int16
+        precision: 3
+        scale: 0.001
+        device_class: voltage
+        scan_interval: 5
+        
+      - name: shoto5_C14
+        unit_of_measurement: V
+        device_address: 218
+        address: 47
+        input_type: holding
+        data_type: int16
+        precision: 3
+        scale: 0.001
+        device_class: voltage
+        scan_interval: 5
+
+      - name: shoto5_C15
+        unit_of_measurement: V
+        device_address: 218
+        address: 48
+        input_type: holding
+        data_type: int16
+        precision: 3
+        scale: 0.001
+        device_class: voltage
+        scan_interval: 5
+#shoto 4 discharge
+
+
+
+
+      - name: shoto5_DISCHARGETIMES
+        unit_of_measurement: 'Times'
+        slave: 218
+        scale: 0.1
+        address: 67
+        input_type: holding
+        data_type: int16
+        precision: 0
+
+      - name: shoto5_DISCHARGE
+        unit_of_measurement: 'Ah'
+        slave: 218
+        address: 69
+        input_type: holding
+        data_type: int16
+        precision: 0
+        
+        
+      - name: Discharge BUS Power Set 5
+        unit_of_measurement: '%'
+        device_address: 218
+        address: 0x1012
+        input_type: holding
+        data_type: uint16
+        scale: 0.01
+        scan_interval: 5
+        
+        
+        
+
+        ######################## shoto5TEMP
+        
+      - name: shoto5_temp1
+        unit_of_measurement: '°C'
+        device_address: 218
+        address: 18
+        input_type: holding
+        data_type: int16
+        precision: 2
+        scan_interval: 5
+        #scale: 0.01
+        
+      - name: shoto5_temp2
+        unit_of_measurement: '°C'
+        device_address: 218
+        address: 19
+        input_type: holding
+        data_type: int16
+        precision: 2
+        scan_interval: 5
+        #scale: 0.01
+      - name: shoto5_temp3
+        unit_of_measurement: '°C'
+        device_address: 218
+        address: 20
+        input_type: holding
+        data_type: int16
+        precision: 2
+        scan_interval: 5
+        #scale: 0.01
+      - name: shoto5_temp4
+        unit_of_measurement: '°C'
+        device_address: 218
+        address: 21
+        input_type: holding
+        data_type: int16
+        precision: 2
+        scan_interval: 5
+        #scale: 0.01  
+      - name: Average charge current setting battery5
+        unit_of_measurement: '%'
+        device_address: 218
+        address: 0x1013
+        input_type: holding
+        data_type: uint16
+        precision: 1
+        scale: 0.01
+### shoto6
+     # ===== Battery 6 =====
+      - name: "BMS Alarm1 Raw Battery6"
+        slave: 219
+        address: 4151
+        input_type: holding
+        data_type: uint16
+        scan_interval: 5
+      - name: "BMS Alarm2 Raw Battery6"
+        slave: 219
+        address: 4152
+        input_type: holding
+        data_type: uint16
+        scan_interval: 5
+      - name: "BMS Alarm3 Raw Battery6"
+        slave: 219
+        address: 4153
+        input_type: holding
+        data_type: uint16
+        scan_interval: 5
+      - name: "BMS Alarm4 Raw Battery6"
+        slave: 219
+        address: 4154
+        input_type: holding
+        data_type: uint16
+        scan_interval: 5
+      - name: "BMS Alarm5 Raw Battery6"
+        slave: 219
+        address: 4155
+        input_type: holding
+        data_type: uint16
+        scan_interval: 5
+      - name: "BMS Protect Raw Battery6"
+        slave: 219
+        address: 4156
+        input_type: holding
+        data_type: uint16
+        scan_interval: 5
+        
+      - name: operating status battery6
+        device_address: 219
+        address: 0x103D
+        input_type: holding
+        data_type: uint16
+        scan_interval: 5
+        
+        
+
+      - name: "Shoto6 Charge Status"
+        device_address: 219
+        address: 4221
+        input_type: holding
+        data_type: uint16
+        
+      - name: "Shoto6 Discharge Status"
+        device_address: 219
+        address: 4222
+        input_type: holding
+        data_type: uint16
+        
+        
+      - name: SHOTO6_REMAINAH
+        unit_of_measurement: 'AH'
+        device_address: 219
+        address: 4146
+        input_type: holding
+        data_type: uint16
+        precision: 1
+        scale: 0.01
+      - name: Discharge BUS Power Set 6
+        unit_of_measurement: '%'
+        device_address: 219
+        address: 0x1012
+        input_type: holding
+        data_type: uint16
+        scale: 0.01
+        scan_interval: 5
+        
+      - name: ibat6
+        unit_of_measurement: A
+        device_address: 219
+        address: 0x1031
+        input_type: holding
+        data_type: int16
+        precision: 2
+        scale: 0.01
+        device_class: current
+        scan_interval: 5       
+         
+      - name: shoto6_V_batt
+        unit_of_measurement: V
+        device_address: 219
+        address: 0
+        input_type: holding
+        data_type: int16
+        precision: 2
+        scale: 0.01
+        device_class: voltage
+        scan_interval: 5
+
+      - name: shoto6_V_pack
+        unit_of_measurement: V
+        device_address: 219
+        address: 1
+        input_type: holding
+        data_type: int16
+        precision: 2
+        scale: 0.01
+        device_class: voltage
+        scan_interval: 5
+        
+      - name: shoto6_A
+        unit_of_measurement: A
+        device_address: 219
+        address: 2
+        input_type: holding
+        data_type: int16
+        precision: 2
+        scale: 0.01
+        device_class: current
+        scan_interval: 5
+
+
+      - name: shoto6_soc
+        unique_id: 'shoto6_soc'
+        unit_of_measurement: '%'
+        device_address: 219
+        address: 0x1034
+        input_type: holding
+        data_type: uint16
+        scale: 0.01
+        precision: 2
+        scan_interval: 5
+
+
+
+      - name: shoto6_Max_temp
+        unit_of_measurement: '°C'
+        device_address: 219
+        address: 5
+        input_type: holding
+        data_type: int16
+        precision: 2
+        scan_interval: 5
+        #scale: 0.01
+        
+      - name: shoto6_Min_temp
+        unit_of_measurement: '°C'
+        device_address: 219
+        address: 6
+        input_type: holding
+        data_type: int16
+        precision: 2
+        scan_interval: 5
+        #scale: 0.01
+        
+      - name: shoto6_C01
+        unit_of_measurement: V
+        device_address: 219
+        address: 34
+        input_type: holding
+        data_type: int16
+        precision: 3
+        scale: 0.001
+        device_class: voltage
+        scan_interval: 5
+
+      - name: shoto6_C02
+        unit_of_measurement: V
+        device_address: 219
+        address: 35
+        input_type: holding
+        data_type: int16
+        precision: 3
+        scale: 0.001
+        device_class: voltage
+        scan_interval: 5
+        
+      - name: shoto6_C03
+        unit_of_measurement: V
+        device_address: 219
+        address: 36
+        input_type: holding
+        data_type: int16
+        precision: 3
+        scale: 0.001
+        device_class: voltage
+        scan_interval: 5
+        
+      - name: shoto6_C04
+        unit_of_measurement: V
+        device_address: 219
+        address: 37
+        input_type: holding
+        data_type: int16
+        precision: 3
+        scale: 0.001
+        device_class: voltage
+        scan_interval: 5
+        
+      - name: shoto6_C05
+        unit_of_measurement: V
+        device_address: 219
+        address: 38
+        input_type: holding
+        data_type: int16
+        precision: 3
+        scale: 0.001
+        device_class: voltage
+        scan_interval: 5
+
+      - name: shoto6_C06
+        unit_of_measurement: V
+        device_address: 219
+        address: 39
+        input_type: holding
+        data_type: int16
+        precision: 3
+        scale: 0.001
+        device_class: voltage
+        scan_interval: 5
+        
+      - name: shoto6_C07
+        unit_of_measurement: V
+        device_address: 219
+        address: 40
+        input_type: holding
+        data_type: int16
+        precision: 3
+        scale: 0.001
+        device_class: voltage
+        scan_interval: 5
+        
+      - name: shoto6_C08
+        unit_of_measurement: V
+        device_address: 219
+        address: 41
+        input_type: holding
+        data_type: int16
+        precision: 3
+        scale: 0.001
+        device_class: voltage
+        scan_interval: 5
+        
+      - name: shoto6_C09
+        unit_of_measurement: V
+        device_address: 219
+        address: 42
+        input_type: holding
+        data_type: int16
+        precision: 3
+        scale: 0.001
+        device_class: voltage
+        scan_interval: 5
+        
+      - name: shoto6_C10
+        unit_of_measurement: V
+        device_address: 219
+        address: 43
+        input_type: holding
+        data_type: int16
+        precision: 3
+        scale: 0.001
+        device_class: voltage
+        scan_interval: 5
+        
+      - name: shoto6_C11
+        unit_of_measurement: V
+        device_address: 219
+        address: 44
+        input_type: holding
+        data_type: int16
+        precision: 3
+        scale: 0.001
+        device_class: voltage
+        scan_interval: 5
+        
+      - name: shoto6_C12
+        unit_of_measurement: V
+        device_address: 219
+        address: 45
+        input_type: holding
+        data_type: int16
+        precision: 3
+        scale: 0.001
+        device_class: voltage
+        scan_interval: 5
+        
+      - name: shoto6_C13
+        unit_of_measurement: V
+        device_address: 219
+        address: 46
+        input_type: holding
+        data_type: int16
+        precision: 3
+        scale: 0.001
+        device_class: voltage
+        scan_interval: 5
+        
+      - name: shoto6_C14
+        unit_of_measurement: V
+        device_address: 219
+        address: 47
+        input_type: holding
+        data_type: int16
+        precision: 3
+        scale: 0.001
+        device_class: voltage
+        scan_interval: 5
+
+      - name: shoto6_C15
+        unit_of_measurement: V
+        device_address: 219
+        address: 48
+        input_type: holding
+        data_type: int16
+        precision: 3
+        scale: 0.001
+        device_class: voltage
+        scan_interval: 5
+#shoto 4 discharge
+
+
+
+
+      - name: shoto6_DISCHARGETIMES
+        unit_of_measurement: 'Times'
+        slave: 219
+        scale: 0.1
+        address: 67
+        input_type: holding
+        data_type: int16
+        precision: 0
+
+      - name: shoto6_DISCHARGE
+        unit_of_measurement: 'Ah'
+        slave: 219
+        address: 69
+        input_type: holding
+        data_type: int16
+        precision: 0
+        
+        
+        
+        
+        
+        
+
+        ######################## shoto6TEMP
+        
+      - name: shoto6_temp1
+        unit_of_measurement: '°C'
+        device_address: 219
+        address: 18
+        input_type: holding
+        data_type: int16
+        precision: 2
+        scan_interval: 5
+        #scale: 0.01
+        
+      - name: shoto6_temp2
+        unit_of_measurement: '°C'
+        device_address: 219
+        address: 19
+        input_type: holding
+        data_type: int16
+        precision: 2
+        scan_interval: 5
+        #scale: 0.01
+      - name: shoto6_temp3
+        unit_of_measurement: '°C'
+        device_address: 219
+        address: 20
+        input_type: holding
+        data_type: int16
+        precision: 2
+        scan_interval: 5
+        #scale: 0.01
+      - name: shoto6_temp4
+        unit_of_measurement: '°C'
+        device_address: 219
+        address: 21
+        input_type: holding
+        data_type: int16
+        precision: 2
+        scan_interval: 5
+        #scale: 0.01  
+      - name: Average charge current setting battery6
+        unit_of_measurement: '%'
+        device_address: 219
+        address: 0x1013
+        input_type: holding
+        data_type: uint16
+        precision: 1
+        scale: 0.01        
+        
+#######sHOTO7
+      # ===== Battery 7 =====
+      - name: "BMS Alarm1 Raw Battery7"
+        slave: 220
+        address: 4151
+        input_type: holding
+        data_type: uint16
+        scan_interval: 5
+      - name: "BMS Alarm2 Raw Battery7"
+        slave: 220
+        address: 4152
+        input_type: holding
+        data_type: uint16
+        scan_interval: 5
+      - name: "BMS Alarm3 Raw Battery7"
+        slave: 220
+        address: 4153
+        input_type: holding
+        data_type: uint16
+        scan_interval: 5
+      - name: "BMS Alarm4 Raw Battery7"
+        slave: 220
+        address: 4154
+        input_type: holding
+        data_type: uint16
+        scan_interval: 5
+      - name: "BMS Alarm5 Raw Battery7"
+        slave: 220
+        address: 4155
+        input_type: holding
+        data_type: uint16
+        scan_interval: 5
+      - name: "BMS Protect Raw Battery7"
+        slave: 220
+        address: 4156
+        input_type: holding
+        data_type: uint16
+        scan_interval: 5
+      - name: operating status battery7
+        device_address: 220
+        address: 0x103D
+        input_type: holding
+        data_type: uint16
+        scan_interval: 5
+        
+      - name: "Shoto7 Charge Status"
+        device_address: 220
+        address: 4221
+        input_type: holding
+        data_type: uint16
+        
+      - name: "Shoto7 Discharge Status"
+        device_address: 220
+        address: 4222
+        input_type: holding
+        data_type: uint16
+        
+        
+      - name: SHOTO7_REMAINAH
+        unit_of_measurement: 'AH'
+        device_address: 220
+        address: 4146
+        input_type: holding
+        data_type: uint16
+        precision: 1
+        scale: 0.01
+      - name: Discharge BUS Power Set 7
+        unit_of_measurement: '%'
+        device_address: 220
+        address: 0x1012
+        input_type: holding
+        data_type: uint16
+        scale: 0.01
+        scan_interval: 5
+        
+      - name: ibat7
+        unit_of_measurement: A
+        device_address: 220
+        address: 0x1031
+        input_type: holding
+        data_type: int16
+        precision: 2
+        scale: 0.01
+        device_class: current
+        scan_interval: 5       
+         
+      - name: SHOTO7_V_batt
+        unit_of_measurement: V
+        device_address: 220
+        address: 0
+        input_type: holding
+        data_type: int16
+        precision: 2
+        scale: 0.01
+        device_class: voltage
+        scan_interval: 5
+
+      - name: SHOTO7_V_pack
+        unit_of_measurement: V
+        device_address: 220
+        address: 1
+        input_type: holding
+        data_type: int16
+        precision: 2
+        scale: 0.01
+        device_class: voltage
+        scan_interval: 5
+        
+      - name: SHOTO7_A
+        unit_of_measurement: A
+        device_address: 220
+        address: 2
+        input_type: holding
+        data_type: int16
+        precision: 2
+        scale: 0.01
+        device_class: current
+        scan_interval: 5
+
+
+      - name: SHOTO7_soc
+        unique_id: 'SHOTO7_soc'
+        unit_of_measurement: '%'
+        device_address: 220
+        address: 0x1034
+        input_type: holding
+        data_type: uint16
+        scale: 0.01
+        precision: 2
+        scan_interval: 5
+
+
+
+      - name: SHOTO7_Max_temp
+        unit_of_measurement: '°C'
+        device_address: 220
+        address: 5
+        input_type: holding
+        data_type: int16
+        precision: 2
+        scan_interval: 5
+        #scale: 0.01
+        
+      - name: SHOTO7_Min_temp
+        unit_of_measurement: '°C'
+        device_address: 220
+        address: 6
+        input_type: holding
+        data_type: int16
+        precision: 2
+        scan_interval: 5
+        #scale: 0.01
+        
+      - name: SHOTO7_C01
+        unit_of_measurement: V
+        device_address: 220
+        address: 34
+        input_type: holding
+        data_type: int16
+        precision: 3
+        scale: 0.001
+        device_class: voltage
+        scan_interval: 5
+
+      - name: SHOTO7_C02
+        unit_of_measurement: V
+        device_address: 220
+        address: 35
+        input_type: holding
+        data_type: int16
+        precision: 3
+        scale: 0.001
+        device_class: voltage
+        scan_interval: 5
+        
+      - name: SHOTO7_C03
+        unit_of_measurement: V
+        device_address: 220
+        address: 36
+        input_type: holding
+        data_type: int16
+        precision: 3
+        scale: 0.001
+        device_class: voltage
+        scan_interval: 5
+        
+      - name: SHOTO7_C04
+        unit_of_measurement: V
+        device_address: 220
+        address: 37
+        input_type: holding
+        data_type: int16
+        precision: 3
+        scale: 0.001
+        device_class: voltage
+        scan_interval: 5
+        
+      - name: SHOTO7_C05
+        unit_of_measurement: V
+        device_address: 220
+        address: 38
+        input_type: holding
+        data_type: int16
+        precision: 3
+        scale: 0.001
+        device_class: voltage
+        scan_interval: 5
+
+      - name: SHOTO7_C06
+        unit_of_measurement: V
+        device_address: 220
+        address: 39
+        input_type: holding
+        data_type: int16
+        precision: 3
+        scale: 0.001
+        device_class: voltage
+        scan_interval: 5
+        
+      - name: SHOTO7_C07
+        unit_of_measurement: V
+        device_address: 220
+        address: 40
+        input_type: holding
+        data_type: int16
+        precision: 3
+        scale: 0.001
+        device_class: voltage
+        scan_interval: 5
+        
+      - name: SHOTO7_C08
+        unit_of_measurement: V
+        device_address: 220
+        address: 41
+        input_type: holding
+        data_type: int16
+        precision: 3
+        scale: 0.001
+        device_class: voltage
+        scan_interval: 5
+        
+      - name: SHOTO7_C09
+        unit_of_measurement: V
+        device_address: 220
+        address: 42
+        input_type: holding
+        data_type: int16
+        precision: 3
+        scale: 0.001
+        device_class: voltage
+        scan_interval: 5
+        
+      - name: SHOTO7_C10
+        unit_of_measurement: V
+        device_address: 220
+        address: 43
+        input_type: holding
+        data_type: int16
+        precision: 3
+        scale: 0.001
+        device_class: voltage
+        scan_interval: 5
+        
+      - name: SHOTO7_C11
+        unit_of_measurement: V
+        device_address: 220
+        address: 44
+        input_type: holding
+        data_type: int16
+        precision: 3
+        scale: 0.001
+        device_class: voltage
+        scan_interval: 5
+        
+      - name: SHOTO7_C12
+        unit_of_measurement: V
+        device_address: 220
+        address: 45
+        input_type: holding
+        data_type: int16
+        precision: 3
+        scale: 0.001
+        device_class: voltage
+        scan_interval: 5
+        
+      - name: SHOTO7_C13
+        unit_of_measurement: V
+        device_address: 220
+        address: 46
+        input_type: holding
+        data_type: int16
+        precision: 3
+        scale: 0.001
+        device_class: voltage
+        scan_interval: 5
+        
+      - name: SHOTO7_C14
+        unit_of_measurement: V
+        device_address: 220
+        address: 47
+        input_type: holding
+        data_type: int16
+        precision: 3
+        scale: 0.001
+        device_class: voltage
+        scan_interval: 5
+
+      - name: SHOTO7_C15
+        unit_of_measurement: V
+        device_address: 220
+        address: 48
+        input_type: holding
+        data_type: int16
+        precision: 3
+        scale: 0.001
+        device_class: voltage
+        scan_interval: 5
+#shoto 4 discharge
+
+
+
+
+      - name: SHOTO7_DISCHARGETIMES
+        unit_of_measurement: 'Times'
+        slave: 220
+        scale: 0.1
+        address: 67
+        input_type: holding
+        data_type: int16
+        precision: 0
+
+      - name: SHOTO7_DISCHARGE
+        unit_of_measurement: 'Ah'
+        slave: 220
+        address: 69
+        input_type: holding
+        data_type: int16
+        precision: 0
+        
+        
+        
+        
+        
+        
+
+        ######################## SHOTO7TEMP
+        
+      - name: SHOTO7_temp1
+        unit_of_measurement: '°C'
+        device_address: 220
+        address: 18
+        input_type: holding
+        data_type: int16
+        precision: 2
+        scan_interval: 5
+        #scale: 0.01
+        
+      - name: SHOTO7_temp2
+        unit_of_measurement: '°C'
+        device_address: 220
+        address: 19
+        input_type: holding
+        data_type: int16
+        precision: 2
+        scan_interval: 5
+        #scale: 0.01
+      - name: SHOTO7_temp3
+        unit_of_measurement: '°C'
+        device_address: 220
+        address: 20
+        input_type: holding
+        data_type: int16
+        precision: 2
+        scan_interval: 5
+        #scale: 0.01
+      - name: SHOTO7_temp4
+        unit_of_measurement: '°C'
+        device_address: 220
+        address: 21
+        input_type: holding
+        data_type: int16
+        precision: 2
+        scan_interval: 5
+        #scale: 0.01  
+      - name: Average charge current setting battery7
+        unit_of_measurement: '%'
+        device_address: 220
+        address: 0x1013
+        input_type: holding
+        data_type: uint16
+        precision: 1
+        scale: 0.01        
+ #############          
+ # ===== Battery 8 =====
+      - name: "BMS Alarm1 Raw Battery8"
+        slave: 221
+        address: 4151
+        input_type: holding
+        data_type: uint16
+        scan_interval: 5
+      - name: "BMS Alarm2 Raw Battery8"
+        slave: 221
+        address: 4152
+        input_type: holding
+        data_type: uint16
+        scan_interval: 5
+      - name: "BMS Alarm3 Raw Battery8"
+        slave: 221
+        address: 4153
+        input_type: holding
+        data_type: uint16
+        scan_interval: 5
+      - name: "BMS Alarm4 Raw Battery8"
+        slave: 221
+        address: 4154
+        input_type: holding
+        data_type: uint16
+        scan_interval: 5
+      - name: "BMS Alarm5 Raw Battery8"
+        slave: 221
+        address: 4155
+        input_type: holding
+        data_type: uint16
+        scan_interval: 5
+      - name: "BMS Protect Raw Battery8"
+        slave: 221
+        address: 4156
+        input_type: holding
+        data_type: uint16
+        scan_interval: 5
+        
+      - name: operating status battery8
+        device_address: 221
+        address: 0x103D
+        input_type: holding
+        data_type: uint16
+        scan_interval: 5
+        
+        
+      - name: "Shoto8 Charge Status"
+        device_address: 221
+        address: 4221
+        input_type: holding
+        data_type: uint16
+        
+      - name: "Shoto8 Discharge Status"
+        device_address: 221
+        address: 4222
+        input_type: holding
+        data_type: uint16
+        
+        
+      - name: shoto8_REMAINAH
+        unit_of_measurement: 'AH'
+        device_address: 221
+        address: 4146
+        input_type: holding
+        data_type: uint16
+        precision: 1
+        scale: 0.01
+      - name: Discharge BUS Power Set 8
+        unit_of_measurement: '%'
+        device_address: 221
+        address: 0x1012
+        input_type: holding
+        data_type: uint16
+        scale: 0.01
+        scan_interval: 5
+        
+      - name: ibat8
+        unit_of_measurement: A
+        device_address: 221
+        address: 0x1031
+        input_type: holding
+        data_type: int16
+        precision: 2
+        scale: 0.01
+        device_class: current
+        scan_interval: 5       
+         
+      - name: shoto8_V_batt
+        unit_of_measurement: V
+        device_address: 221
+        address: 0
+        input_type: holding
+        data_type: int16
+        precision: 2
+        scale: 0.01
+        device_class: voltage
+        scan_interval: 5
+
+      - name: shoto8_V_pack
+        unit_of_measurement: V
+        device_address: 221
+        address: 1
+        input_type: holding
+        data_type: int16
+        precision: 2
+        scale: 0.01
+        device_class: voltage
+        scan_interval: 5
+        
+      - name: shoto8_A
+        unit_of_measurement: A
+        device_address: 221
+        address: 2
+        input_type: holding
+        data_type: int16
+        precision: 2
+        scale: 0.01
+        device_class: current
+        scan_interval: 5
+
+
+      - name: shoto8_soc
+        unique_id: 'shoto8_soc'
+        unit_of_measurement: '%'
+        device_address: 221
+        address: 0x1034
+        input_type: holding
+        data_type: uint16
+        scale: 0.01
+        precision: 2
+        scan_interval: 5
+
+
+
+      - name: shoto8_Max_temp
+        unit_of_measurement: '°C'
+        device_address: 221
+        address: 5
+        input_type: holding
+        data_type: int16
+        precision: 2
+        scan_interval: 5
+        #scale: 0.01
+        
+      - name: shoto8_Min_temp
+        unit_of_measurement: '°C'
+        device_address: 221
+        address: 6
+        input_type: holding
+        data_type: int16
+        precision: 2
+        scan_interval: 5
+        #scale: 0.01
+        
+      - name: shoto8_C01
+        unit_of_measurement: V
+        device_address: 221
+        address: 34
+        input_type: holding
+        data_type: int16
+        precision: 3
+        scale: 0.001
+        device_class: voltage
+        scan_interval: 5
+
+      - name: shoto8_C02
+        unit_of_measurement: V
+        device_address: 221
+        address: 35
+        input_type: holding
+        data_type: int16
+        precision: 3
+        scale: 0.001
+        device_class: voltage
+        scan_interval: 5
+        
+      - name: shoto8_C03
+        unit_of_measurement: V
+        device_address: 221
+        address: 36
+        input_type: holding
+        data_type: int16
+        precision: 3
+        scale: 0.001
+        device_class: voltage
+        scan_interval: 5
+        
+      - name: shoto8_C04
+        unit_of_measurement: V
+        device_address: 221
+        address: 37
+        input_type: holding
+        data_type: int16
+        precision: 3
+        scale: 0.001
+        device_class: voltage
+        scan_interval: 5
+        
+      - name: shoto8_C05
+        unit_of_measurement: V
+        device_address: 221
+        address: 38
+        input_type: holding
+        data_type: int16
+        precision: 3
+        scale: 0.001
+        device_class: voltage
+        scan_interval: 5
+
+      - name: shoto8_C06
+        unit_of_measurement: V
+        device_address: 221
+        address: 39
+        input_type: holding
+        data_type: int16
+        precision: 3
+        scale: 0.001
+        device_class: voltage
+        scan_interval: 5
+        
+      - name: shoto8_C07
+        unit_of_measurement: V
+        device_address: 221
+        address: 40
+        input_type: holding
+        data_type: int16
+        precision: 3
+        scale: 0.001
+        device_class: voltage
+        scan_interval: 5
+        
+      - name: shoto8_C08
+        unit_of_measurement: V
+        device_address: 221
+        address: 41
+        input_type: holding
+        data_type: int16
+        precision: 3
+        scale: 0.001
+        device_class: voltage
+        scan_interval: 5
+        
+      - name: shoto8_C09
+        unit_of_measurement: V
+        device_address: 221
+        address: 42
+        input_type: holding
+        data_type: int16
+        precision: 3
+        scale: 0.001
+        device_class: voltage
+        scan_interval: 5
+        
+      - name: shoto8_C10
+        unit_of_measurement: V
+        device_address: 221
+        address: 43
+        input_type: holding
+        data_type: int16
+        precision: 3
+        scale: 0.001
+        device_class: voltage
+        scan_interval: 5
+        
+      - name: shoto8_C11
+        unit_of_measurement: V
+        device_address: 221
+        address: 44
+        input_type: holding
+        data_type: int16
+        precision: 3
+        scale: 0.001
+        device_class: voltage
+        scan_interval: 5
+        
+      - name: shoto8_C12
+        unit_of_measurement: V
+        device_address: 221
+        address: 45
+        input_type: holding
+        data_type: int16
+        precision: 3
+        scale: 0.001
+        device_class: voltage
+        scan_interval: 5
+        
+      - name: shoto8_C13
+        unit_of_measurement: V
+        device_address: 221
+        address: 46
+        input_type: holding
+        data_type: int16
+        precision: 3
+        scale: 0.001
+        device_class: voltage
+        scan_interval: 5
+        
+      - name: shoto8_C14
+        unit_of_measurement: V
+        device_address: 221
+        address: 47
+        input_type: holding
+        data_type: int16
+        precision: 3
+        scale: 0.001
+        device_class: voltage
+        scan_interval: 5
+
+      - name: shoto8_C15
+        unit_of_measurement: V
+        device_address: 221
+        address: 48
+        input_type: holding
+        data_type: int16
+        precision: 3
+        scale: 0.001
+        device_class: voltage
+        scan_interval: 5
+#shoto 4 discharge
+
+
+
+
+      - name: shoto8_DISCHARGETIMES
+        unit_of_measurement: 'Times'
+        slave: 221
+        scale: 0.1
+        address: 67
+        input_type: holding
+        data_type: int16
+        precision: 0
+
+      - name: shoto8_DISCHARGE
+        unit_of_measurement: 'Ah'
+        slave: 221
+        address: 69
+        input_type: holding
+        data_type: int16
+        precision: 0
+        
+        
+        
+        
+        
+        
+
+        ######################## shoto8TEMP
+        
+      - name: shoto8_temp1
+        unit_of_measurement: '°C'
+        device_address: 221
+        address: 18
+        input_type: holding
+        data_type: int16
+        precision: 2
+        scan_interval: 5
+        #scale: 0.01
+        
+      - name: shoto8_temp2
+        unit_of_measurement: '°C'
+        device_address: 221
+        address: 19
+        input_type: holding
+        data_type: int16
+        precision: 2
+        scan_interval: 5
+        #scale: 0.01
+      - name: shoto8_temp3
+        unit_of_measurement: '°C'
+        device_address: 221
+        address: 20
+        input_type: holding
+        data_type: int16
+        precision: 2
+        scan_interval: 5
+        #scale: 0.01
+      - name: shoto8_temp4
+        unit_of_measurement: '°C'
+        device_address: 221
+        address: 21
+        input_type: holding
+        data_type: int16
+        precision: 2
+        scan_interval: 5
+        #scale: 0.01  
+      - name: Average charge current setting battery8
+        unit_of_measurement: '%'
+        device_address: 221
+        address: 0x1013
+        input_type: holding
+        data_type: uint16
+        precision: 1
+        scale: 0.01        
+           
+
+##GROWATTT
+        
+
+  - name: IOT
+    type: serial
+    method: rtu
+    port: /dev/ttyUSB0
+    baudrate: 9600
+    stopbits: 1
+    bytesize: 8
+    parity: N
+    timeout: 1
+    sensors:
+
+ #################################################################
+      # 1. PV Array Metrics
+      ##################################################################
+      - name: PV1 Voltage
+        slave: 1
+        address: 1
+        input_type: input
+        data_type: uint16
+        scale: 0.1
+        unit_of_measurement: V
+        device_class: voltage
+        state_class: measurement
+        scan_interval: 5
+
+      - name: PV2 Voltage
+        slave: 1
+        address: 2
+        input_type: input
+        data_type: uint16
+        scale: 0.1
+        unit_of_measurement: V
+        device_class: voltage
+        state_class: measurement
+        scan_interval: 5
+
+      - name: PV1 Current
+        slave: 1
+        address: 7
+        input_type: input
+        data_type: uint16
+        scale: 0.1
+        precision: 1
+        unit_of_measurement: A
+        device_class: current
+        state_class: measurement
+        scan_interval: 5
+
+      - name: PV2 Current
+        slave: 1
+        address: 8
+        input_type: input
+        data_type: uint16
+        scale: 0.1
+        unit_of_measurement: A
+        precision: 1
+        device_class: current
+        state_class: measurement
+        scan_interval: 5
+
+      - name: PV1 Power
+        slave: 1
+        address: 3
+        input_type: input
+        data_type: uint32
+        scale: 0.1
+        unit_of_measurement: W
+        device_class: power
+        state_class: measurement
+        scan_interval: 5
+
+      - name: PV2 Power
+        slave: 1
+        address: 5
+        input_type: input
+        data_type: uint32
+        scale: 0.1
+        unit_of_measurement: W
+        device_class: power
+        state_class: measurement
+        scan_interval: 5
+
+      ##################################################################
+      # 2. Battery Metrics
+      ##################################################################
+      - name: Battery Voltage
+        slave: 1
+        address: 17
+        input_type: input
+        data_type: uint16
+        scale: 0.01
+        precision: 1
+        unit_of_measurement: V
+        device_class: voltage
+        state_class: measurement
+        scan_interval: 5
+
+
+
+      - name: Battery SOC
+        slave: 1
+        address: 18
+        input_type: input
+        data_type: uint16
+        unit_of_measurement: "%"
+        device_class: battery
+        state_class: measurement
+        scan_interval: 5
+
+      - name: Battery Power
+        slave: 1
+        address: 77
+        input_type: input
+        data_type: int32
+        scale: 0.1
+        unit_of_measurement: W
+        device_class: power
+        state_class: measurement
+        scan_interval: 5
+        # positive = discharge, negative = charge
+        
+      - name: Total Charge current  
+        unit_of_measurement: 'A'
+        slave: 1
+        address: 83
+        input_type: input
+        scale: 0.1
+        offset: 0
+        precision: 2
+        scan_interval: 5
+        data_type: int16  
+        device_class: current
+        state_class: measurement  
+        
+
+      - name: Inv Current  Growatt
+        unit_of_measurement: 'A'
+        slave: 1
+        address: 35
+        input_type: input
+        scale: 0.1
+        offset: 0
+        precision: 2
+        scan_interval: 5
+        data_type: int16 
+        device_class: current
+        state_class: measurement  
+
+        ##################################################################
+      # 3. Grid (AC Input) Metrics
+      ##################################################################
+      - name: Grid Voltage
+        slave: 1
+        address: 20
+        input_type: input
+        data_type: uint16
+        scale: 0.1
+        unit_of_measurement: V
+        device_class: voltage
+        state_class: measurement
+        scan_interval: 5
+
+      - name: Grid Frequency
+        slave: 1
+        address: 21
+        input_type: input
+        data_type: uint16
+        scale: 0.01
+        unit_of_measurement: Hz
+        device_class: frequency
+        state_class: measurement
+        scan_interval: 5
+
+      # Output Active Power (W) => reg 09-10, uint32, scale 0.1
+      - name: "OP Active Power"
+        slave: 1
+        address: 9           # 09 = high word
+        input_type: input
+        data_type: uint32
+        # swap: none (default) karena urutan H,L
+        scale: 0.1
+        precision: 1
+        unit_of_measurement: "W"
+      # Output Apparent Power (VA) => reg 11-12, uint32, scale 0.1
+      - name: "OP Apparent Power"
+        slave: 1
+        address: 11
+        input_type: input
+        data_type: uint32
+        scale: 0.1
+        precision: 1
+        unit_of_measurement: "VA"
+
+      # Opsional: Grid power (signed)
+      - name: "Grid Active Power"
+        slave: 1
+        address: 36
+        input_type: input
+        data_type: int32     # signed!
+        scale: 0.1
+        precision: 1
+        unit_of_measurement: "W"
+      - name: "Grid Apparent Power"
+        slave: 1
+        address: 38
+        input_type: input
+        data_type: uint32
+        scale: 0.1
+        precision: 1
+        unit_of_measurement: "VA"
+
+      ##################################################################
+      # 4. AC Output & Load Metrics
+      ##################################################################
+      - name: AC Output Voltage
+        slave: 1
+        address: 22
+        input_type: input
+        data_type: uint16
+        scale: 0.1
+        unit_of_measurement: V
+        device_class: voltage
+        state_class: measurement
+        scan_interval: 5
+
+      - name: AC Output Frequency
+        slave: 1
+        address: 23
+        input_type: input
+        data_type: uint16
+        scale: 0.01
+        unit_of_measurement: Hz
+        device_class: frequency
+        state_class: measurement
+        scan_interval: 5
+
+      - name: Load Percentage
+        slave: 1
+        address: 27
+        input_type: input
+        data_type: uint16
+        scale: 0.1
+        unit_of_measurement: "%"
+        state_class: measurement
+        scan_interval: 5
+
+      - name: Load Current
+        slave: 1
+        address: 34
+        input_type: input
+        data_type: uint16
+        scale: 0.1
+        unit_of_measurement: A
+        precision: 2
+        device_class: current
+        state_class: measurement
+        scan_interval: 5
+        
+      - name: Output Power Low Growatt
+        unit_of_measurement: 'W'
+        slave: 1
+        address: 10
+        input_type: input
+        scale: 0.1
+        data_type: int16
+        device_class: power
+        state_class: measurement
+        scan_interval: 5
+
+      - name: AC discharge watt Low Growatt
+        unit_of_measurement: 'W'
+        slave: 1
+        address: 70
+        input_type: input
+        scale: 0.1
+        offset: 0
+        precision: 0
+        scan_interval: 5
+        data_type: int16 
+        device_class: power    
+        state_class: measurement 
+        
+        
+          
+      - name: Bat discharge watt low Growatt
+        unit_of_measurement: 'W'
+        slave: 1
+        address: 74
+        input_type: input
+        scale: 0.1
+        offset: 0
+        precision: 0
+        scan_interval: 5
+        data_type: int16 
+        device_class: power      
+        state_class: measurement 
+       
+
+        ##################################################################
+      # 5. Energy Totals (Today & Lifetime)
+      ##################################################################
+      
+      - name: PV1 Energy Today
+        slave: 1
+        address: 48
+        input_type: input
+        data_type: uint32
+        scale: 0.1
+        precision: 1
+        unit_of_measurement: kWh
+        device_class: energy
+        state_class: total_increasing
+        scan_interval: 5
+
+      - name: PV1 Energy Total
+        slave: 1
+        address: 50
+        input_type: input
+        data_type: uint32
+        scale: 0.1
+        unit_of_measurement: kWh
+        device_class: energy
+        state_class: total_increasing
+        scan_interval: 5600
+
+
+
+      - name: AC Charge Energy Today
+        slave: 1
+        address: 56
+        input_type: input
+        data_type: uint32
+        scale: 0.1
+        unit_of_measurement: kWh
+        device_class: energy
+        state_class: total_increasing
+        scan_interval: 10000
+
+      - name: AC Charge Energy Total
+        slave: 1
+        address: 58
+        input_type: input
+        data_type: uint32
+        scale: 0.1
+        unit_of_measurement: kWh
+        device_class: energy
+        state_class: total_increasing
+        scan_interval: 10000
+
+      - name: Battery Discharge Energy Today
+        slave: 1
+        address: 60
+        input_type: input
+        data_type: uint32
+        scale: 0.1
+        unit_of_measurement: kWh
+        device_class: energy
+        state_class: total_increasing
+        scan_interval: 10000
+        
+
+      - name: Battery Discharge Energy Total
+        slave: 1
+        address: 62
+        input_type: input
+        data_type: uint32
+        scale: 0.1
+        unit_of_measurement: kWh
+        device_class: energy
+        state_class: total_increasing
+        scan_interval: 10000
+
+      - name: Inverter Status
+        slave: 1
+        address: 0
+        input_type: input
+        data_type: uint16
+        state_class: measurement
+        scan_interval: 5
+
+
+
+      - name: Inverter Temperature
+        slave: 1
+        address: 25
+        input_type: input
+        data_type: uint16
+        scale: 0.1
+        unit_of_measurement: °C
+        device_class: temperature
+        state_class: measurement
+        scan_interval: 5
+
+      - name: DC-DC Temperature
+        slave: 1
+        address: 26
+        input_type: input
+        data_type: uint16
+        scale: 0.1
+        unit_of_measurement: °C
+        device_class: temperature
+        state_class: measurement
+        scan_interval: 5
+
+      - name: MPPT Fan Speed
+        slave: 1
+        address: 81
+        input_type: input
+        data_type: uint16
+        unit_of_measurement: "%"
+        state_class: measurement
+        scan_interval: 5
+        
+      - name: Inverter Fan Speed
+        slave: 1
+        address: 82
+        input_type: input
+        data_type: uint16
+        unit_of_measurement: "%"
+        state_class: measurement
+        scan_interval: 5
+
+
+      - name: Output Prioty
+        slave: 1
+        address: 1
+        input_type: holding
+        data_type: uint16
+        unit_of_measurement: 'mode'
+        scan_interval: 5
+
+      - name: Charge source
+        slave: 1
+        address: 2
+        input_type: holding
+        data_type: uint16
+        unit_of_measurement: 'mode'
+        scan_interval: 5
+
+      - name: AC In Mode
+        slave: 1
+        address: 8
+        input_type: holding
+        data_type: uint16
+        scale: 0.1
+        unit_of_measurement: 'mode'
+        scan_interval: 5
+
+      - name: Output Volt Set
+        slave: 1
+        address: 18
+        input_type: holding
+        data_type: uint16
+        unit_of_measurement: 'mode'
+        scan_interval: 10000
+
+      - name: Output Freq Type
+        slave: 1
+        address: 19
+        input_type: holding
+        data_type: uint16
+        scale: 0.1
+        unit_of_measurement: 'mode'
+        scan_interval: 10000
+
+      - name: Buzzer on/off enable set Growatt
+        slave: 1
+        address: 22
+        input_type: holding
+        data_type: uint16
+        scale: 0.1
+        unit_of_measurement: 'mode'
+        scan_interval: 10000
+
+      - name: Max Charge Current
+        slave: 1
+        address: 34
+        input_type: holding
+        data_type: uint16
+        unit_of_measurement: A
+        device_class: current
+        state_class: measurement
+        scan_interval: 5
+
+      - name: Bulk Charge Voltage
+        slave: 1
+        address: 35
+        input_type: holding
+        data_type: uint16
+        scale: 0.1
+        precision: 1
+        unit_of_measurement: V
+        device_class: voltage
+        state_class: measurement
+        scan_interval: 5
+
+      - name: float charge voltage
+        slave: 1
+        address: 36
+        input_type: holding
+        data_type: uint16
+        scale: 0.1
+        precision: 1
+        unit_of_measurement: V
+        device_class: voltage
+        state_class: measurement
+        scan_interval: 5
+
+      - name: AC Charge Current
+        slave: 1
+        address: 38
+        input_type: holding
+        data_type: uint16
+        unit_of_measurement: A
+        device_class: current
+        state_class: measurement
+        scan_interval: 5
+
+
+
+
+      - name: Battery Type
+        slave: 1
+        address: 39
+        input_type: holding
+        data_type: uint16
+        unit_of_measurement: 'mode'
+        scan_interval: 5
+
+      - name: Battery Low Cutoff Voltage
+        slave: 1
+        address: 82
+        input_type: holding
+        data_type: uint16
+        scale: 0.1
+        precision: 1
+        unit_of_measurement: V
+        device_class: voltage
+        state_class: measurement
+        scan_interval: 5
+
+      - name: AC to Battery Switch Voltage
+        slave: 1
+        address: 95
+        input_type: holding
+        data_type: uint16
+        scale: 0.1
+        precision: 1
+        unit_of_measurement: V
+        device_class: voltage
+        state_class: measurement
+        scan_interval: 5
+
+      - name: Bat Low to UTI Voltage
+        slave: 1
+        address: 37
+        input_type: holding
+        data_type: uint16
+        scale: 0.1
+        precision: 1
+        unit_of_measurement: V
+        device_class: voltage
+        state_class: measurement
+        scan_interval: 5
+        
+      - name: Growatt EQ Enable
+        slave: 1
+        address: 108
+        input_type: holding
+        data_type: uint16
+        unit_of_measurement: ""
+        scan_interval: 5
+
+      - name: Growatt EQ Charge Voltage
+        slave: 1
+        address: 109
+        input_type: holding
+        data_type: uint16
+        scale: 0.1
+        precision: 1
+        unit_of_measurement: V
+        device_class: voltage
+        state_class: measurement
+        scan_interval: 10000
+
+      - name: Growatt EQ Time
+        slave: 1
+        address: 110
+        input_type: holding
+        data_type: uint16
+        unit_of_measurement: min
+        device_class: duration
+        state_class: measurement
+        scan_interval: 10000
+
+      - name: Growatt EQ Timeout
+        slave: 1
+        address: 111
+        input_type: holding
+        data_type: uint16
+        unit_of_measurement: min
+        device_class: duration
+        state_class: measurement
+        scan_interval: 10000
+
+      - name: Growatt EQ Interval
+        slave: 1
+        address: 112
+        input_type: holding
+        data_type: uint16
+        unit_of_measurement: d
+        device_class: duration
+        state_class: measurement
+        scan_interval: 10000
+
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
