@@ -830,6 +830,103 @@ sensor:
 
   - platform: modbus_controller
     modbus_controller_id: bms${bms_id}
+    id: bms${bms_id}_operation_hours
+    name: "${name} ${bms_name} operation hours"
+    address: 0x0209
+    register_type: holding
+    value_type: U_DWORD
+    register_count: 2
+    unit_of_measurement: "h"
+    state_class: total_increasing
+    accuracy_decimals: 0
+
+  - platform: modbus_controller
+    modbus_controller_id: bms${bms_id}
+    id: bms${bms_id}_parallel_machines_online
+    name: "${name} ${bms_name} parallel machines online"
+    address: 0x103F
+    register_type: holding
+    value_type: U_WORD
+    accuracy_decimals: 0
+
+  - platform: modbus_controller
+    modbus_controller_id: bms${bms_id}
+    id: bms${bms_id}_total_charge_capacity
+    name: "${name} ${bms_name} total charge capacity"
+    address: 0x1040
+    register_type: holding
+    value_type: U_DWORD
+    register_count: 2
+    unit_of_measurement: "Ah"
+    device_class: current
+    state_class: total_increasing
+    accuracy_decimals: 1
+
+  - platform: modbus_controller
+    modbus_controller_id: bms${bms_id}
+    id: bms${bms_id}_total_capacity
+    name: "${name} ${bms_name} total capacity"
+    address: 0x1042
+    register_type: holding
+    value_type: U_DWORD
+    register_count: 2
+    unit_of_measurement: "Ah"
+    device_class: current
+    state_class: total_increasing
+    accuracy_decimals: 1
+
+  - platform: modbus_controller
+    modbus_controller_id: bms${bms_id}
+    id: bms${bms_id}_total_charging_time
+    name: "${name} ${bms_name} total charging time"
+    address: 0x1044
+    register_type: holding
+    value_type: U_DWORD
+    register_count: 2
+    unit_of_measurement: "s"
+    state_class: total_increasing
+    accuracy_decimals: 0
+
+  - platform: modbus_controller
+    modbus_controller_id: bms${bms_id}
+    id: bms${bms_id}_total_time
+    name: "${name} ${bms_name} total time"
+    address: 0x1046
+    register_type: holding
+    value_type: U_DWORD
+    register_count: 2
+    unit_of_measurement: "s"
+    state_class: total_increasing
+    accuracy_decimals: 0
+
+  - platform: modbus_controller
+    modbus_controller_id: bms${bms_id}
+    id: bms${bms_id}_total_charge_wh
+    name: "${name} ${bms_name} total charge energy"
+    address: 0x1048
+    register_type: holding
+    value_type: U_DWORD
+    register_count: 2
+    unit_of_measurement: "Wh"
+    device_class: energy
+    state_class: total_increasing
+    accuracy_decimals: 0
+
+  - platform: modbus_controller
+    modbus_controller_id: bms${bms_id}
+    id: bms${bms_id}_total_discharge_wh
+    name: "${name} ${bms_name} total discharge energy"
+    address: 0x104A
+    register_type: holding
+    value_type: U_DWORD
+    register_count: 2
+    unit_of_measurement: "Wh"
+    device_class: energy
+    state_class: total_increasing
+    accuracy_decimals: 0
+
+  - platform: modbus_controller
+    modbus_controller_id: bms${bms_id}
     address: 0x1038
     register_type: holding
     id: bms${bms_id}_errors_bitmask
