@@ -26,7 +26,111 @@ packages:
   bms_base: !include bms_base.yaml
   bms_combine: !include bms_combine.yaml
   bms_temperature_sensor: !include bms_temperature_sensor_4.yaml
-  bms_errors_bitmask: !include bms_errors_bitmask_JK_BLE.yaml
+  bms_errors_bitmask: !include bms_errors_bitmask_SMARTLI_RS485.yaml
+
+# +--------------------------------------+
+# | Number controls                      |
+# +--------------------------------------+
+
+number:
+  # +--------------------------------------+
+  # | BUS Settings Controls                |
+  # +--------------------------------------+
+  - platform: modbus_controller
+    modbus_controller_id: bms${bms_id}
+    name: "${name} ${bms_name} Discharge BUS Voltage Setting Control"
+    address: 0x1010
+    register_type: holding
+    value_type: U_WORD
+    unit_of_measurement: "V"
+    min_value: 0
+    max_value: 655.35
+    step: 0.01
+    multiply: 100
+    entity_category: config
+
+  - platform: modbus_controller
+    modbus_controller_id: bms${bms_id}
+    name: "${name} ${bms_name} Discharge BUS Current Setting Control"
+    address: 0x1011
+    register_type: holding
+    value_type: U_WORD
+    unit_of_measurement: "%"
+    min_value: 0
+    max_value: 655.35
+    step: 0.01
+    multiply: 100
+    entity_category: config
+
+  - platform: modbus_controller
+    modbus_controller_id: bms${bms_id}
+    name: "${name} ${bms_name} Discharge BUS Power Setting Control"
+    address: 0x1012
+    register_type: holding
+    value_type: U_WORD
+    unit_of_measurement: "%"
+    min_value: 0
+    max_value: 655.35
+    step: 0.01
+    multiply: 100
+    entity_category: config
+
+  - platform: modbus_controller
+    modbus_controller_id: bms${bms_id}
+    name: "${name} ${bms_name} Average Charge Current Setting Control"
+    address: 0x1013
+    register_type: holding
+    value_type: U_WORD
+    unit_of_measurement: "%"
+    min_value: 0
+    max_value: 655.35
+    step: 0.01
+    multiply: 100
+    entity_category: config
+
+  - platform: modbus_controller
+    modbus_controller_id: bms${bms_id}
+    name: "${name} ${bms_name} Discharge BUS Voltage Step Setting Control"
+    address: 0x1014
+    register_type: holding
+    value_type: U_WORD
+    unit_of_measurement: "V"
+    min_value: 0
+    max_value: 655.35
+    step: 0.01
+    multiply: 100
+    entity_category: config
+
+  - platform: modbus_controller
+    modbus_controller_id: bms${bms_id}
+    name: "${name} ${bms_name} Depth of Discharge DOD Control"
+    address: 0x1015
+    register_type: holding
+    value_type: U_WORD
+    unit_of_measurement: "%"
+    min_value: 0
+    max_value: 100
+    step: 0.01
+    multiply: 100
+    entity_category: config
+
+# +--------------------------------------+
+# | Select controls                      |
+# +--------------------------------------+
+
+select:
+  - platform: modbus_controller
+    modbus_controller_id: bms${bms_id}
+    name: "${name} ${bms_name} Mode Control"
+    address: 0x1016
+    value_type: U_WORD
+    entity_category: config
+    optionsmap:
+      "Power Management": 0x0010
+      "Battery Characteristic Discharge Mode": 0x0303
+      "Maintenance": 0x0505
+      "Production Test": 0x0606
+      "Self-managed Constant Voltage Discharge": 0x0707
 
 # +--------------------------------------+
 # | Component settings                   |
@@ -69,44 +173,56 @@ binary_sensor:
   - platform: template
     name: "${name} ${bms_name} Charging Allowed"
     id: bms${bms_id}_charging_allowed
-    device_class: battery_charging
     lambda: |-
-      if (id(bms${bms_id}_errors_bitmask).has_state()) {
-        uint16_t bitmask = static_cast<uint16_t>(id(bms${bms_id}_errors_bitmask).state);
-        return !(bitmask & 0x1000);  // Check bit 12 (0x1000) for charging allowed
+      if (id(bms${bms_id}_charge_mos_state).has_state()) {
+        return id(bms${bms_id}_charge_mos_state).state;  // Return charge MOS state directly
       }
       return {};  // Return an empty optional if no state is available
 
   - platform: template
     name: "${name} ${bms_name} Discharging Allowed"
     id: bms${bms_id}_discharging_allowed
-    device_class: battery
     lambda: |-
-      if (id(bms${bms_id}_errors_bitmask).has_state()) {
-        uint16_t bitmask = static_cast<uint16_t>(id(bms${bms_id}_errors_bitmask).state);
-        return !(bitmask & 0x2000);  // Check bit 13 (0x2000) for discharging allowed
+      if (id(bms${bms_id}_discharge_mos_state).has_state()) {
+        return id(bms${bms_id}_discharge_mos_state).state;  // Return discharge MOS state directly
       }
       return {};  // Return an empty optional if no state is available
 
-  - platform: modbus_controller
-    modbus_controller_id: bms${bms_id}
-    address: 0x1038
-    register_type: holding
+  - platform: template
     name: "${name} ${bms_name} Charging"
     id: bms${bms_id}_charging
-    device_class: battery_charging
     lambda: |-
-      return !(data[0] & 0x10);  // Return true if charging is allowed
+      if (id(bms${bms_id}_charge_mos_state).has_state()) {
+        return id(bms${bms_id}_charge_mos_state).state;  // Reference charge MOS state sensor
+      }
+      return {};
+
+  - platform: template
+    name: "${name} ${bms_name} Discharging"
+    id: bms${bms_id}_discharging
+    lambda: |-
+      if (id(bms${bms_id}_discharge_mos_state).has_state()) {
+        return id(bms${bms_id}_discharge_mos_state).state;  // Reference discharge MOS state sensor
+      }
+      return {};
 
   - platform: modbus_controller
     modbus_controller_id: bms${bms_id}
-    address: 0x1038
+    address: 0x107D
     register_type: holding
-    name: "${name} ${bms_name} Discharging"
-    id: bms${bms_id}_discharging
-    device_class: battery
+    name: "${name} ${bms_name} Charging Loop Control"
+    id: bms${bms_id}_charging_loop_control
     lambda: |-
-      return !(data[0] & 0x20);  // Return true if discharging is allowed
+      return data[0] == 1;  // 1 = charging circuit closed, 0x55 = disconnected
+
+  - platform: modbus_controller
+    modbus_controller_id: bms${bms_id}
+    address: 0x107E
+    register_type: holding
+    name: "${name} ${bms_name} Discharge Loop Control"
+    id: bms${bms_id}_discharge_loop_control
+    lambda: |-
+      return data[0] == 1;  // 1 = discharge circuit closed, 0x55 = disconnected
 
 sensor:
   #   1  Voltage of pack                       2 byte   R  uint16  10mV
@@ -195,7 +311,7 @@ sensor:
     accuracy_decimals: 2
     lambda: |-
       if (id(bms${bms_id}_current).state < 0) {
-        return id(bms${bms_id}_power).state;
+        return abs(id(bms${bms_id}_power).state);
       }
       return 0;
 
@@ -927,11 +1043,168 @@ sensor:
 
   - platform: modbus_controller
     modbus_controller_id: bms${bms_id}
+    name: "${name} ${bms_name} discharge BUS voltage setting"
+    address: 0x1010
+    register_type: holding
+    value_type: U_WORD
+    unit_of_measurement: "V"
+    device_class: voltage
+    state_class: measurement
+    accuracy_decimals: 2
+    filters:
+      - multiply: 0.01
+
+  - platform: modbus_controller
+    modbus_controller_id: bms${bms_id}
+    name: "${name} ${bms_name} discharge BUS current setting"
+    address: 0x1011
+    register_type: holding
+    value_type: U_WORD
+    unit_of_measurement: "%"
+    state_class: measurement
+    accuracy_decimals: 2
+    filters:
+      - multiply: 0.01
+
+  - platform: modbus_controller
+    modbus_controller_id: bms${bms_id}
+    name: "${name} ${bms_name} discharge BUS power setting"
+    address: 0x1012
+    register_type: holding
+    value_type: U_WORD
+    unit_of_measurement: "%"
+    state_class: measurement
+    accuracy_decimals: 2
+    filters:
+      - multiply: 0.01
+
+  - platform: modbus_controller
+    modbus_controller_id: bms${bms_id}
+    name: "${name} ${bms_name} average charge current setting"
+    address: 0x1013
+    register_type: holding
+    value_type: U_WORD
+    unit_of_measurement: "%"
+    state_class: measurement
+    accuracy_decimals: 2
+    filters:
+      - multiply: 0.01
+
+  - platform: modbus_controller
+    modbus_controller_id: bms${bms_id}
+    name: "${name} ${bms_name} discharge BUS voltage step setting"
+    address: 0x1014
+    register_type: holding
+    value_type: U_WORD
+    unit_of_measurement: "V"
+    device_class: voltage
+    state_class: measurement
+    accuracy_decimals: 2
+    filters:
+      - multiply: 0.01
+
+  - platform: modbus_controller
+    modbus_controller_id: bms${bms_id}
+    name: "${name} ${bms_name} depth of discharge DOD"
+    address: 0x1015
+    register_type: holding
+    value_type: U_WORD
+    unit_of_measurement: "%"
+    state_class: measurement
+    accuracy_decimals: 2
+    filters:
+      - multiply: 0.01
+
+  - platform: modbus_controller
+    modbus_controller_id: bms${bms_id}
+    id: bms${bms_id}_bms_alarm_status_1
+    name: "${name} ${bms_name} BMS alarm status 1"
+    address: 0x1037
+    register_type: holding
+    value_type: U_WORD
+    accuracy_decimals: 0
+
+  - platform: modbus_controller
+    modbus_controller_id: bms${bms_id}
     address: 0x1038
     register_type: holding
     id: bms${bms_id}_errors_bitmask
     name: "${name} ${bms_name} error bitmask"
     value_type: U_WORD
+
+  - platform: modbus_controller
+    modbus_controller_id: bms${bms_id}
+    id: bms${bms_id}_bms_alarm_status_3
+    name: "${name} ${bms_name} BMS alarm status 3"
+    address: 0x1039
+    register_type: holding
+    value_type: U_WORD
+    accuracy_decimals: 0
+
+  - platform: template
+    name: "${name} ${bms_name} Charge MOS State"
+    id: bms${bms_id}_charge_mos_state
+    lambda: |-
+      if (id(bms${bms_id}_errors_bitmask).has_state()) {
+        uint16_t bitmask = static_cast<uint16_t>(id(bms${bms_id}_errors_bitmask).state);
+        return (bitmask & 0x0010) ? false : true;  // BIT4: 0=on, 1=off
+      }
+      return {};
+
+  - platform: template
+    name: "${name} ${bms_name} Discharge MOS State"
+    id: bms${bms_id}_discharge_mos_state
+    lambda: |-
+      if (id(bms${bms_id}_errors_bitmask).has_state()) {
+        uint16_t bitmask = static_cast<uint16_t>(id(bms${bms_id}_errors_bitmask).state);
+        return (bitmask & 0x0020) ? false : true;  // BIT5: 0=on, 1=off
+      }
+      return {};
+
+  - platform: template
+    name: "${name} ${bms_name} Charging Status"
+    id: bms${bms_id}_charging_status
+    lambda: |-
+      if (id(bms${bms_id}_errors_bitmask).has_state()) {
+        uint16_t bitmask = static_cast<uint16_t>(id(bms${bms_id}_errors_bitmask).state);
+        return (bitmask & 0x0100) ? true : false;  // BIT0 of low byte (DATA3): charging status
+      }
+      return {};
+
+  - platform: template
+    name: "${name} ${bms_name} Discharging Status"
+    id: bms${bms_id}_discharging_status
+    lambda: |-
+      if (id(bms${bms_id}_errors_bitmask).has_state()) {
+        uint16_t bitmask = static_cast<uint16_t>(id(bms${bms_id}_errors_bitmask).state);
+        return (bitmask & 0x0200) ? true : false;  // BIT1 of low byte (DATA3): discharge status
+      }
+      return {};
+
+switch:
+  - platform: modbus_controller
+    modbus_controller_id: bms${bms_id}
+    name: "${name} ${bms_name} Charging Loop Control Switch"
+    address: 0x107D
+    register_type: holding
+    entity_category: config
+    lambda: "return x == 1;"
+    write_lambda: |-
+      return x ? 1 : 0x55;
+    use_write_multiple: false
+    force_new_range: true
+
+  - platform: modbus_controller
+    modbus_controller_id: bms${bms_id}
+    name: "${name} ${bms_name} Discharge Loop Control Switch"
+    address: 0x107E
+    register_type: holding
+    entity_category: config
+    lambda: "return x == 1;"
+    write_lambda: |-
+      return x ? 1 : 0x55;
+    use_write_multiple: false
+    force_new_range: true
 
 text_sensor:
   - platform: modbus_controller

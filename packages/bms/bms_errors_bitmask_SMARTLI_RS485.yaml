@@ -1,0 +1,147 @@
+# Updated : 2025.09.15
+# Version : 1.0.0
+# GitHub  : https://github.com/syssi/esphome-jk-bms
+
+# YamBMS ( Yet another multi-BMS Merging Solution )
+
+# This YAML is free software: you can redistribute it and/or
+# modify it under the terms of the GNU General Public License
+# as published by the Free Software Foundation, either version 3
+# of the License, or (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+# See the GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program. If not, see <http://www.gnu.org/licenses/gpl.html>.
+
+  # +--------------------------------------+
+  # | SMARTLI BMS Alarm Status Registers   |
+  # +--------------------------------------+
+
+  # BMS Alarm Status 1 (0x1037) - 16bit
+  # Hbyte (DATA0):
+  # BIT0: (reserved)
+  # BIT1: (reserved)
+  # BIT2: (reserved)
+  # BIT3: Cell voltage is too low fault
+  # BIT4: Voltage sampling disconnection
+  # BIT5: The charging MOS is damaged
+  # BIT6: Discharge MOS damage
+  # BIT7: The voltage sampling element is damaged
+  #
+  # Lbyte (DATA1):
+  # BIT0: NTC disconnection
+  # BIT1: ADC damaged
+  # BIT2: Reverse battery connection
+  # BIT3: Fan on failure
+  # BIT4: Battery Lock
+  # BIT5: (reserved)
+  # BIT6: (reserved)
+  # BIT7: (reserved)
+
+  # BMS Alarm Status 2 (0x1038) - 16bit
+  # Hbyte (DATA2):
+  # BIT0: Discharge overtemperature protection
+  # BIT1: Discharge undertemperature protection
+  # BIT2: Overall Overvoltage Protection
+  # BIT3: Startup failed
+  # BIT4: Charge MOS on state (0 on, 1 off)
+  # BIT5: Discharge MOS conduction state (0 on, 1 off)
+  # BIT6: (reserved)
+  # BIT7: reserved
+  #
+  # Lbyte (DATA3):
+  # BIT0: charging status
+  # BIT1: Discharge status
+  # BIT2: Short circuit protection
+  # BIT3: (reserved)
+  # BIT4: Overvoltage protection (not resolved)
+  # BIT5: undervoltage protection (not resolved)
+  # BIT6: Charging over temperature protection
+  # BIT7: Charging under temperature protection
+
+  # +--------------------------------------+
+  # | YamBMS Errors Bitmask (16bit)        |
+  # +--------------------------------------+
+
+  # Bit 0     General alarm                                0000 0000 0000 0001         0x0001
+  # Bit 1     Battery high voltage alarm                   0000 0000 0000 0010         0x0002
+  # Bit 2     Battery low voltage alarm                    0000 0000 0000 0100         0x0004
+  # Bit 3     Battery high temperature alarm               0000 0000 0000 1000         0x0008
+  # Bit 4     Battery low temperature alarm                0000 0000 0001 0000         0x0010
+  # Bit 5     Battery high temperature charge alarm        0000 0000 0010 0000         0x0020
+  # Bit 6     Battery low temperature charge alarm         0000 0000 0100 0000         0x0040
+  # Bit 7     Battery high discharge current alarm         0000 0000 1000 0000         0x0080
+  # Bit 8     Battery high charge current alarm            0000 0001 0000 0000         0x0100
+  # Bit 9     Contactor alarm                              0000 0010 0000 0000         0x0200
+  # Bit 10    Short circuit alarm                          0000 0100 0000 0000         0x0400
+  # Bit 11    BMS internal alarm                           0000 1000 0000 0000         0x0800
+  # Bit 12    Cell imbalance alarm                         0001 0000 0000 0000         0x1000
+  # Bit 13    Reserved                                     0010 0000 0000 0000         0x2000
+  # Bit 14    Reserved                                     0100 0000 0000 0000         0x4000
+  # Bit 15    Reserved                                     1000 0000 0000 0000         0x8000
+
+sensor:
+  - platform: template
+    id: bms${bms_id}_yambms_errors_bitmask
+    name: "${name} ${bms_name} YamBMS Errors Bitmask"
+    update_interval: ${bms_update_interval}
+    accuracy_decimals: 0
+    icon: mdi:alert-circle-outline
+    filters:
+      - or:
+        - throttle: 10s
+        - delta: 1
+    lambda: |-
+      uint16_t bms_alarm_1 = id(bms${bms_id}_bms_alarm_status_1).state;
+      uint16_t bms_alarm_2 = id(bms${bms_id}_errors_bitmask).state;
+      uint16_t bms_alarm_3 = id(bms${bms_id}_bms_alarm_status_3).state;
+      uint16_t yambms_errors_bitmask = 0;
+
+      // BMS Alarm Status 1 (0x1037) mappings
+      if (bms_alarm_1 > 0) {
+        if (bms_alarm_1 & 0x0008) yambms_errors_bitmask |= 0x0004; // Cell voltage too low -> Battery low voltage alarm
+        if (bms_alarm_1 & 0x0010) yambms_errors_bitmask |= 0x0800; // Voltage sampling disconnection -> BMS internal alarm
+        if (bms_alarm_1 & 0x0020) yambms_errors_bitmask |= 0x0200; // Charging MOS damaged -> Contactor alarm
+        if (bms_alarm_1 & 0x0040) yambms_errors_bitmask |= 0x0200; // Discharge MOS damage -> Contactor alarm
+        if (bms_alarm_1 & 0x0080) yambms_errors_bitmask |= 0x0800; // Voltage sampling element damaged -> BMS internal alarm
+        if (bms_alarm_1 & 0x0100) yambms_errors_bitmask |= 0x0800; // NTC disconnection -> BMS internal alarm
+        if (bms_alarm_1 & 0x0200) yambms_errors_bitmask |= 0x0800; // ADC damaged -> BMS internal alarm
+        if (bms_alarm_1 & 0x0400) yambms_errors_bitmask |= 0x0800; // Reverse battery connection -> BMS internal alarm
+        if (bms_alarm_1 & 0x0800) yambms_errors_bitmask |= 0x0001; // Fan on failure -> General alarm
+        if (bms_alarm_1 & 0x1000) yambms_errors_bitmask |= 0x0001; // Battery Lock -> General alarm
+      }
+
+      // BMS Alarm Status 2 (0x1038) mappings
+      if (bms_alarm_2 > 0) {
+        if (bms_alarm_2 & 0x0001) yambms_errors_bitmask |= 0x0008; // Discharge overtemperature -> Battery high temperature alarm
+        if (bms_alarm_2 & 0x0002) yambms_errors_bitmask |= 0x0010; // Discharge undertemperature -> Battery low temperature alarm
+        if (bms_alarm_2 & 0x0004) yambms_errors_bitmask |= 0x0002; // Overall Overvoltage -> Battery high voltage alarm
+        if (bms_alarm_2 & 0x0008) yambms_errors_bitmask |= 0x0001; // Startup failed -> General alarm
+        // Note: BIT4 and BIT5 are MOS states (0=on, 1=off), not error conditions
+        // Only trigger contactor alarm if MOS is off AND there should be current flow
+        if (bms_alarm_2 & 0x0400) yambms_errors_bitmask |= 0x0400; // Short circuit protection -> Short circuit alarm
+        if (bms_alarm_2 & 0x1000) yambms_errors_bitmask |= 0x0002; // Overvoltage protection -> Battery high voltage alarm
+        if (bms_alarm_2 & 0x2000) yambms_errors_bitmask |= 0x0004; // Undervoltage protection -> Battery low voltage alarm
+        if (bms_alarm_2 & 0x4000) yambms_errors_bitmask |= 0x0020; // Charging over temperature -> Battery high temperature charge alarm
+        if (bms_alarm_2 & 0x8000) yambms_errors_bitmask |= 0x0040; // Charging under temperature -> Battery low temperature charge alarm
+      }
+
+      // BMS Alarm Status 3 (0x1039) mappings
+      if (bms_alarm_3 > 0) {
+        if (bms_alarm_3 & 0x0001) yambms_errors_bitmask |= 0x0010; // Environmental low temperature -> Battery low temperature alarm
+        if (bms_alarm_3 & 0x0002) yambms_errors_bitmask |= 0x0008; // Environmental high temperature -> Battery high temperature alarm
+        if (bms_alarm_3 & 0x0080) yambms_errors_bitmask |= 0x0001; // Fan on -> General alarm
+        if (bms_alarm_3 & 0x0100) yambms_errors_bitmask |= 0x0200; // Force charging MOS on -> Contactor alarm
+        if (bms_alarm_3 & 0x0200) yambms_errors_bitmask |= 0x0200; // Force charging MOS off -> Contactor alarm
+        if (bms_alarm_3 & 0x0400) yambms_errors_bitmask |= 0x0200; // Forced discharge MOS on -> Contactor alarm
+        if (bms_alarm_3 & 0x0800) yambms_errors_bitmask |= 0x0200; // Forced discharge MOS off -> Contactor alarm
+        if (bms_alarm_3 & 0x2000) yambms_errors_bitmask |= 0x0008; // MOSFET over temperature -> Battery high temperature alarm
+        if (bms_alarm_3 & 0x4000) yambms_errors_bitmask |= 0x0010; // MOSFET low temperature -> Battery low temperature alarm
+        if (bms_alarm_3 & 0x8000) yambms_errors_bitmask |= 0x0040; // Charging temperature too low -> Battery low temperature charge alarm
+      }
+
+      return yambms_errors_bitmask;
